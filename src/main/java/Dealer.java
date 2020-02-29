@@ -19,6 +19,7 @@ public class Dealer {
         else{
             //Add three cards from top of the deck to dealer's hand
             for(int x = 0; x < 3; x++){
+                dealersHand.clear();
                 dealersHand.add(theDeck.remove(0));
             }
         }
