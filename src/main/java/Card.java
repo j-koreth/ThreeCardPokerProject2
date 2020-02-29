@@ -22,4 +22,7 @@ public class Card {
         return values;
     }
 
+    public String toString(){
+        return suit + value + "";
+    }
 }
