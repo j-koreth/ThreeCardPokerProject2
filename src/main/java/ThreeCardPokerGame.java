@@ -4,6 +4,9 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class ThreeCardPokerGame extends Application {
+	Player playerOne;
+	Player playerTwo;
+	Dealer theDealer;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
