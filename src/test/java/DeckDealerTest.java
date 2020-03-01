@@ -24,10 +24,10 @@ public class DeckDealerTest {
         assertEquals(52, testDeck1.size(), "Deck is the wrong size");
 
 
-        for (int i = 0; i < 52; ++i) {
-            System.out.println(testDeck1.get(i));
-        }
-
+//        for (int i = 0; i < 52; ++i) {
+//            System.out.println(testDeck1.get(i));
+//        }
+        System.out.println(testDeck1);
     }
 
     @Test
@@ -116,8 +116,8 @@ public class DeckDealerTest {
     void dealerTest2() //check to make sure dealing a hand works correctly
     {
         testDealer2.dealHand();
-        assertEquals(49, testDealer2.theDeck.size(), "");
-        assertEquals(3, testDealer2.dealersHand.size(), "Cards have been dealt, dealer has their hand");
+        assertEquals(49, testDealer2.theDeck.size(), "Cards were not dealt");
+        assertEquals(3, testDealer2.dealersHand.size(), "Cards have not been dealt");
 
         ArrayList<Card> testHand1 = new ArrayList<Card>();
         for (int i = 0; i < 3; ++i) {
@@ -125,15 +125,15 @@ public class DeckDealerTest {
         }
 
         testDealer2.dealHand();
-        assertEquals(46, testDealer2.theDeck.size(), "Cards have been dealt, deck is smaller");
-        assertEquals(3, testDealer2.dealersHand.size(), "Cards have been dealt, dealer has their hand");
+        assertEquals(46, testDealer2.theDeck.size(), "Cards have not been dealt");
+        assertEquals(3, testDealer2.dealersHand.size(), "Cards have not been dealt");
 
         ArrayList<Card> testHand2 = new ArrayList<Card>();
         for (int i = 0; i < 3; ++i) {
             testHand2.add(testDealer2.dealersHand.get(i));
         }
 
-        assertNotEquals(testHand1, testHand2, "The dealer has a new hand");
+        assertNotEquals(testHand1, testHand2, "The hands are the same");
     }
 
     @Test
@@ -162,10 +162,28 @@ public class DeckDealerTest {
     }
 
     @Test
-    void dealerTest4()
+    void dealerTest4() //Check to make sure after deck is shuffled the top hand are different
     {
         testDealer4.dealHand();
-        fail("Need to write test");
+        assertEquals(3, testDealer4.dealersHand.size(), "Cards were not dealt");
+
+        ArrayList<Card> testHand3 = new ArrayList<Card>();
+        for (int i = 0; i < 3; ++i) {
+            testHand3.add(testDealer4.dealersHand.get(i));
+        }
+
+        for (int i = 0; i < 6; ++i) {
+            testDealer4.dealHand();
+        }
+
+        assertEquals(49, testDealer4.theDeck.size(), "The size did not reset to full deck");
+
+        ArrayList<Card> testHand4 = new ArrayList<Card>();
+        for (int i = 0; i < 3; ++i) {
+            testHand4.add(testDealer4.dealersHand.get(i));
+        }
+
+        assertNotEquals(testHand3, testHand4, "Shuffled deck returned the same hands");
     }
 
     @Test
