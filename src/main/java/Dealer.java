@@ -11,19 +11,20 @@ public class Dealer {
 
     //Generate dealers hand
     public ArrayList<Card> dealHand(){
+        ArrayList<Card> cards = new ArrayList<Card>();
+
         //If the Deck Size is less than 34, make new Deck and generate new dealer's hand
         if(theDeck.size() <= 34){
             theDeck.newDeck();
             return dealHand();
         }
         else{
-            dealersHand.clear();
-            //Add three cards from top of the deck to dealer's hand
+            //Add three cards from top of the deck to return
             for(int x = 0; x < 3; x++){
-                dealersHand.add(theDeck.remove(0));
+                cards.add(theDeck.remove(0));
             }
         }
-        return dealersHand;
+        return cards;
     }
 
 }
