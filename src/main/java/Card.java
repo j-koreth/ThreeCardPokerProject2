@@ -1,4 +1,6 @@
-public class Card {
+import java.util.Arrays;
+
+public class Card implements Comparable<Card>{
     //Clubs: C, Diamonds: D, Spades: S, Hearts: H
     char suit;
 
@@ -22,7 +24,14 @@ public class Card {
         return values;
     }
 
+    //Provides a String Formatted in "Suit + Value" format for Printing
     public String toString(){
         return "" + suit + value;
+    }
+
+    //Lets the use of java sort algorithms by ranking cards by their value
+    @Override
+    public int compareTo(Card o) {
+        return this.value - o.value;
     }
 }
