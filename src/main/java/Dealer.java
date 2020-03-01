@@ -12,7 +12,7 @@ public class Dealer {
     //Generate dealers hand
     public ArrayList<Card> dealHand(){
         //If the Deck Size is less than 34, make new Deck and generate new dealer's hand
-        if(theDeck.size() < 34){
+        if(theDeck.size() <= 34){
             theDeck.newDeck();
             return dealHand();
         }
