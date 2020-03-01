@@ -40,10 +40,30 @@ public class ThreeCardLogic {
     }
 
     public static int evalPPWinnings(ArrayList<Card> hand, int bet){
-        return 0;
+        int winnings = evalHand(hand);
+
+        if (winnings == 1) {
+            bet *= 40;
+        }
+        else if (winnings == 2) {
+            bet *= 30;
+        }
+        else if (winnings == 3) {
+            bet *= 6;
+        }
+        else if (winnings == 4) {
+            bet *= 3;
+        }
+        else if (winnings == 5) {
+            bet *= 1;
+        }
+        else {
+            bet = 0;
+        }
+        return bet;
     }
 
-    public static int compareHands(ArrayList<Card> dealer, ArrayList<Card> player){
+    public static int compareHands(ArrayList<Card> dealer, ArrayList<Card> player) {
         return 0;
     }
 

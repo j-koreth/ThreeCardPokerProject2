@@ -175,6 +175,6 @@ public class DeckDealerTest {
         for (int i = 0; i < 5; ++i) {
             testDealer5.dealHand();
         }
-        ass
+
     }
 }
