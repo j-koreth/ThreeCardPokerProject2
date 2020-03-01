@@ -23,11 +23,7 @@ public class DeckDealerTest {
     {
         assertEquals(52, testDeck1.size(), "Deck is the wrong size");
 
-
-//        for (int i = 0; i < 52; ++i) {
-//            System.out.println(testDeck1.get(i));
-//        }
-        System.out.println(testDeck1);
+        System.out.println("The deck is: " + testDeck1);
     }
 
     @Test
@@ -173,7 +169,12 @@ public class DeckDealerTest {
     @Test
     void dealerTest5()
     {
-        testDealer5.dealHand();
-        fail("Need to write test");
+        assertEquals(52, testDealer5.theDeck.size());
+
+        //Move through two rounds
+        for (int i = 0; i < 5; ++i) {
+            testDealer5.dealHand();
+        }
+        ass
     }
 }
