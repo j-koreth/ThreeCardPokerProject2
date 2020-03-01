@@ -1,14 +1,41 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class ThreeCardLogic {
     public static int evalHand(ArrayList<Card> hand){
-        ArrayList ch = new ArrayList();
-        for(Card card : hand){
-            ch.add(hand.toString());
+
+        Collections.sort(hand, new SortCard());
+
+        //Checking if it's a flush
+        boolean flush = hand.get(0).suit == hand.get(1).suit && hand.get(1).suit == hand.get(2).suit;
+
+        boolean straight = hand.get(0).value+1 ==  hand.get(1).value &&  hand.get(1).value+1 ==  hand.get(2).value;
+
+        boolean threeOfAKind = hand.get(0).value ==  hand.get(1).value &&  hand.get(1).value ==  hand.get(2).value;
+
+        boolean pair = hand.get(0).value ==  hand.get(1).value ||  hand.get(1).value ==  hand.get(2).value || hand.get(0).value ==  hand.get(2).value;
+
+        if(flush && straight){
+            return 1;
         }
-        Collections.sort(ch);
-        System.out.println(hand);
+
+        if(threeOfAKind){
+            return 2;
+        }
+
+        if(straight){
+            return 3;
+        }
+
+        if(flush){
+            return 4;
+        }
+
+        if(pair){
+            return 5;
+        }
+
         return 0;
     }
 
@@ -18,5 +45,12 @@ public class ThreeCardLogic {
 
     public static int compareHands(ArrayList<Card> dealer, ArrayList<Card> player){
         return 0;
+    }
+
+    static class SortCard implements Comparator<Card> {
+        @Override
+        public int compare(Card a, Card b) {
+            return a.value - b.value;
+        }
     }
 }
