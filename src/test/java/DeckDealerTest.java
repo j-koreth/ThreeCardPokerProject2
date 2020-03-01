@@ -33,7 +33,7 @@ public class DeckDealerTest {
     @Test
     void deckTest2() //Check if after removing half the deck if new deck restores deck to correct amount.
     {
-        for (int i = 0; i < (testDeck2.size() / 2); ++i) {
+        for (int i = 0; i < 26; ++i) {
             testDeck2.remove(0);
         }
         assertEquals(26, testDeck2.size(), "Deck was not cut in half");
@@ -140,18 +140,21 @@ public class DeckDealerTest {
     void dealerTest3() //Test to make sure dealer's deck doesn't fall below 34 cards
     {
         assertEquals(52, testDealer3.theDeck.size());
+        testDealer3.dealHand();
 
         for (int i = 0; i < 7; ++i) {
             //Make sure dealer is getting new hands
             System.out.println("Dealer's hand:");
             for (int j = 0; j < 3; ++j) {
-                System.out.println(testDealer3.dealHand().get(j));
+                System.out.println(testDealer3.dealersHand.get(j));
             }
             System.out.println("Deck size: " + testDealer3.theDeck.size());
             testDealer3.dealHand();
         }
 
-        assertNotEquals(34, testDealer3.theDeck.size());
+        if (testDealer3.theDeck.size() <= 34) {
+            fail("Deck did not reset");
+        }
 
     }
 
