@@ -116,7 +116,7 @@ public class DeckDealerTest {
     void dealerTest2() //check to make sure dealing a hand works correctly
     {
         testDealer2.dealHand();
-        assertEquals(49, testDealer2.theDeck.size(), "Cards have been dealt, deck is smaller");
+        assertEquals(49, testDealer2.theDeck.size(), "");
         assertEquals(3, testDealer2.dealersHand.size(), "Cards have been dealt, dealer has their hand");
 
         ArrayList<Card> testHand1 = new ArrayList<Card>();
@@ -141,6 +141,7 @@ public class DeckDealerTest {
     {
         assertEquals(52, testDealer3.theDeck.size());
         testDealer3.dealHand();
+        assertEquals(3, testDealer3.dealersHand.size(), "Dealer's hand size is wrong");
 
         for (int i = 0; i < 7; ++i) {
             //Make sure dealer is getting new hands
@@ -151,6 +152,8 @@ public class DeckDealerTest {
             System.out.println("Deck size: " + testDealer3.theDeck.size());
             testDealer3.dealHand();
         }
+
+        System.out.println("Deck size is " + testDealer3.theDeck.size());
 
         if (testDealer3.theDeck.size() <= 34) {
             fail("Deck did not reset");
