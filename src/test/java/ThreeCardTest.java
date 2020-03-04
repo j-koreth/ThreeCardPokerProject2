@@ -10,6 +10,7 @@ class ThreeCardTest {
 
 	Dealer testDeck1 = new Dealer();
 	Player testPlayer = new Player();
+
 	Dealer testDealer8 = new Dealer();
 	Player testPlayer8 = new Player();
 	Dealer testDealer9 = new Dealer();
@@ -28,6 +29,10 @@ class ThreeCardTest {
 	Player testPlayer15 = new Player();
 	Dealer testDealer16 = new Dealer();
 	Player testPlayer16 = new Player();
+	Dealer testDealer17 = new Dealer();
+	Player testPlayer17 = new Player();
+	Dealer testDealer18 = new Dealer();
+	Player testPlayer18 = new Player();
 
 	@Test
 	void logicTest1(){
@@ -441,8 +446,8 @@ class ThreeCardTest {
 	{
 		/*Check for when the dealer and player have exactly equal hands*/
 		testDealer16.dealersHand.add(new Card('H', 8));
-		testDealer16.dealersHand.add(new Card('S', 6));
-		testDealer16.dealersHand.add(new Card('C', 8));
+		testDealer16.dealersHand.add(new Card('C', 6));
+		testDealer16.dealersHand.add(new Card('S', 8));
 
 		testPlayer16.hand.add(new Card('C', 8));
 		testPlayer16.hand.add(new Card('D', 8));
@@ -455,7 +460,7 @@ class ThreeCardTest {
 
 		/*Check for when the dealer has a better hand than the player*/
 		testDealer16.dealersHand.add(new Card('H', 11));
-		testDealer16.dealersHand.add(new Card('C', 7));
+		testDealer16.dealersHand.add(new Card('S', 7));
 		testDealer16.dealersHand.add(new Card('D', 11));
 
 		testPlayer16.hand.add(new Card('S', 7));
@@ -477,5 +482,58 @@ class ThreeCardTest {
 		testPlayer16.hand.add(new Card('C', 10));
 
 		assertEquals(2, ThreeCardLogic.compareHands(testDealer16.dealersHand, testPlayer16.hand), "The player's hand is not better");
+	}
+
+	@Test
+	void logicTest17() //Check for certain odd cases with pairs
+	{
+		/*When there's card from the same suit, make sure they're not considered flush*/
+		testDealer17.dealersHand.add(new Card('S', 6));
+		testDealer17.dealersHand.add(new Card('S', 12));
+		testDealer17.dealersHand.add(new Card('H', 6));
+
+		assertNotEquals(4, ThreeCardLogic.evalHand(testDealer17.dealersHand), "Make sure dealer's hand isn't flush");
+
+		testPlayer17.hand.add(new Card('C', 8));
+		testPlayer17.hand.add(new Card('D', 3));
+		testPlayer17.hand.add(new Card('C', 3));
+
+		assertNotEquals(4, ThreeCardLogic.evalHand(testPlayer17.hand), "Make sure dealer's hand isn't flush");
+		assertEquals(1, ThreeCardLogic.compareHands(testDealer17.dealersHand, testPlayer17.hand), "Dealer has the better hand");
+
+		testDealer17.dealersHand.clear();
+		testPlayer17.hand.clear();
+
+		/*When the high card for both is equal*/
+		testDealer17.dealersHand.add(new Card('H', 4));
+		testDealer17.dealersHand.add(new Card('S', 4));
+		testDealer17.dealersHand.add(new Card('D', 14));
+
+		testPlayer17.hand.add(new Card('C', 8));
+		testPlayer17.hand.add(new Card('D', 14));
+		testPlayer17.hand.add(new Card('S', 8));
+
+		assertEquals(2, ThreeCardLogic.compareHands(testDealer17.dealersHand, testPlayer17.hand), "Player has the better hand");
+	}
+
+	@Test
+	void logicTest18() // Other possible hands test
+	{
+		/*Case where a card number in every suit are dealt*/
+		testDealer18.dealersHand.add(new Card('S', 9));
+		testDealer18.dealersHand.add(new Card('C', 9));
+		testDealer18.dealersHand.add(new Card('H', 9));
+
+		testPlayer18.hand.add(new Card('D', 9));
+		testPlayer18.hand.add(new Card('H', 13));
+		testPlayer18.hand.add(new Card('D', 13));
+
+		/*Dealer = 2, player = 5*/
+		assertEquals(1, ThreeCardLogic.compareHands(testDealer18.dealersHand, testPlayer18.hand), "Dealer didn't win");
+
+		testDealer18.dealersHand.clear();
+		testPlayer18.hand.clear();
+
+
 	}
 }
