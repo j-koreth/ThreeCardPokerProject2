@@ -115,15 +115,13 @@ public class ThreeCardLogic {
                 }
             }
             //Three of a Kind
+            /*There is no situation where this should return 0 since there are only 4 suits*/
             else if(evalHand(dealerDup) == 2){
                 if(dealerDup.get(2).value < playerDup.get(2).value){
                     return 2;
                 }
-                else if(dealerDup.get(2).value > playerDup.get(2).value){
+                else {
                     return 1;
-                }
-                else{
-                    return 0;
                 }
             }
             //Straight
@@ -141,10 +139,10 @@ public class ThreeCardLogic {
             //Flush
             else if(evalHand(dealerDup) == 4){
                 for(int x = 2; x >= 0; x--){
-                    if(dealerDup.get(x).compareTo(playerDup.get(x)) == -1){
+                    if(dealerDup.get(x).compareTo(playerDup.get(x)) < 0){
                         return 2;
                     }
-                    else if(dealerDup.get(x).compareTo(playerDup.get(x)) == 1){
+                    else if(dealerDup.get(x).compareTo(playerDup.get(x)) > 0){
                         return 1;
                     }
                 }
@@ -159,10 +157,10 @@ public class ThreeCardLogic {
                 ArrayList<Card> playerPair = new ArrayList<>();
                 getPair(playerPair, playerDup);
 
-                if(dealerPair.get(0).compareTo(playerPair.get(0)) == -1){
+                if(dealerPair.get(0).compareTo(playerPair.get(0)) < 0){
                     return 2;
                 }
-                else if(dealerPair.get(0).compareTo(playerPair.get(0)) == 1){
+                else if(dealerPair.get(0).compareTo(playerPair.get(0)) > 0){
                     return 1;
                 }
                 else{
