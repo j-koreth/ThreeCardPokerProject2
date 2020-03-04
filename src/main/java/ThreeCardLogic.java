@@ -93,10 +93,10 @@ public class ThreeCardLogic {
             //Highest Card
             if(evalHand(dealerDup) == 0){
                 for(int x = 2; x >= 0; x--){
-                    if(dealerDup.get(x).compareTo(playerDup.get(x)) == -1){
+                    if(dealerDup.get(x).compareTo(playerDup.get(x)) < 0){
                         return 2;
                     }
-                    else if(dealerDup.get(x).compareTo(playerDup.get(x)) == 1){
+                    else if(dealerDup.get(x).compareTo(playerDup.get(x)) > 0){
                         return 1;
                     }
                 }

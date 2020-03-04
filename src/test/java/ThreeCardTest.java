@@ -236,6 +236,44 @@ class ThreeCardTest {
 	@Test
 	void logicTest11() // Check possibilities for tie with garbage hand (evalHand = 0)
 	{
+		/*Check for when the dealer and player have exactly equal hands*/
+		testDealer11.dealersHand.add(new Card('S', 7));
+		testDealer11.dealersHand.add(new Card('H', 5));
+		testDealer11.dealersHand.add(new Card('C', 11));
+
+		testPlayer11.hand.add(new Card('H', 7));
+		testPlayer11.hand.add(new Card('D', 11));
+		testPlayer11.hand.add(new Card('C', 5));
+
+		assertEquals(0, ThreeCardLogic.compareHands(testDealer11.dealersHand, testPlayer11.hand), "The hands are not equal");
+
+		testDealer11.dealersHand.clear();
+		testPlayer11.hand.clear();
+
+		/*Check for when the dealer has a better hand than the player*/
+		testDealer11.dealersHand.add(new Card('D', 12));
+		testDealer11.dealersHand.add(new Card('C', 4));
+		testDealer11.dealersHand.add(new Card('S', 8));
+
+		testPlayer11.hand.add(new Card('H', 5));
+		testPlayer11.hand.add(new Card('S', 9));
+		testPlayer11.hand.add(new Card('H', 2));
+
+		assertEquals(1, ThreeCardLogic.compareHands(testDealer11.dealersHand, testPlayer11.hand), "The dealer's hand is not better");
+
+		testDealer11.dealersHand.clear();
+		testPlayer11.hand.clear();
+
+		/*Check for when the player has a better hand than the dealer*/
+		testDealer11.dealersHand.add(new Card('D', 13));
+		testDealer11.dealersHand.add(new Card('H', 4));
+		testDealer11.dealersHand.add(new Card('S', 7));
+
+		testPlayer11.hand.add(new Card('C', 2));
+		testPlayer11.hand.add(new Card('S', 9));
+		testPlayer11.hand.add(new Card('D', 13));
+
+		assertEquals(2, ThreeCardLogic.compareHands(testDealer11.dealersHand, testPlayer11.hand), "The player's hand is not better");
 
 	}
 
