@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class ThreeCardLogic {
     public static int evalHand(ArrayList<Card> hand){
@@ -78,10 +77,16 @@ public class ThreeCardLogic {
         Collections.sort(dealerDup);
         Collections.sort(playerDup);
 
-        if(evalHand(dealerDup) > evalHand(playerDup)){
+        if((evalHand(dealerDup) < evalHand(playerDup)) && (evalHand(dealerDup)  != 0)){
             return 1;
         }
-        else if(evalHand(dealerDup) < evalHand(playerDup)){
+        else if((evalHand(dealerDup) > evalHand(playerDup)) && (evalHand(playerDup) != 0)){
+            return 2;
+        }
+        else if ((evalHand(dealerDup)  != 0) && (evalHand(playerDup) == 0)) {
+            return 1;
+        }
+        else if ((evalHand(dealerDup)  == 0) && (evalHand(playerDup) != 0)) {
             return 2;
         }
         else{

@@ -1,20 +1,17 @@
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
-
-import org.junit.jupiter.api.DisplayName;
-
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class ThreeCardTest {
 
 	Dealer testDeck1 = new Dealer();
 	Player testPlayer = new Player();
-	Player testPlayer2 = new Player();
+	Dealer testDealer8 = new Dealer();
+	Player testPlayer8 = new Player();
 
 	@Test
 	void logicTest1(){
@@ -124,5 +121,30 @@ class ThreeCardTest {
 		int result = ThreeCardLogic.evalPPWinnings(test7, 10);
 
 		assertEquals(10, result, "Winnings was returned wrong");
+
+		test7.clear();
+		test7.add(new Card('C', 9));
+		test7.add(new Card('C', 13));
+		test7.add(new Card('S', 8));
+		assertNotEquals(5, ThreeCardLogic.evalHand(test7), "hand was considered a pair");
+
+	}
+
+	@Test
+	void logicTest8() //Checking when the dealer has the highest card they should win
+	{
+		testDealer8.dealersHand.add(new Card('C', 9));
+		testDealer8.dealersHand.add(new Card('H', 9));
+		testDealer8.dealersHand.add(new Card('D', 12));
+
+		testPlayer8.hand.add(new Card('S', 7));
+		testPlayer8.hand.add(new Card('H', 3));
+		testPlayer8.hand.add(new Card('D', 9));
+
+		assertEquals(5, ThreeCardLogic.evalHand(testDealer8.dealersHand), "Dealer's hand is not a pair");
+
+		assertNotEquals(testDealer8.dealersHand, testPlayer8.hand, "Hands are considered equal");
+
+		assertEquals(1, ThreeCardLogic.compareHands(testDealer8.dealersHand, testPlayer8.hand), "The dealer's hand was not considered better");
 	}
 }
