@@ -38,6 +38,7 @@ public class ThreeCardPokerGame extends Application {
 		pane.setStyle("-fx-background-color: gold;");
 
 		dealerLabel = new Label("Dealer");
+		dealerLabel.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: black;");
 		Label dealerTemp = new Label("Image will go here");
 		dealerStuff = new VBox(20, dealerLabel, dealerTemp);
 		dealerStuff.setAlignment(Pos.TOP_CENTER);
@@ -50,8 +51,9 @@ public class ThreeCardPokerGame extends Application {
 		playerOne = new Player();
 		winningOne = new Label("Winnings: $" + playerOne.totalWinnings + ".00");
 		playerLabelOne = new Label("Player 1");
+		playerLabelOne.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: black;");
 		Label playerOneTemp = new Label("Image will go here");
-		playerOneStuff = new VBox(30, playerLabelOne, winningOne, playerOneTemp);
+		playerOneStuff = new VBox(30, playerLabelOne, playerOneTemp, winningOne);
 		ante1 = new Label("Ante");
 		anteOne = new TextField();
 		ppw1 = new Label("PPW");
@@ -64,8 +66,9 @@ public class ThreeCardPokerGame extends Application {
 		playerTwo = new Player();
 		winningTwo = new Label("Winnings: $" + playerTwo.totalWinnings + ".00");
 		playerLabelTwo = new Label("Player 2");
+		playerLabelTwo.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: black;");
 		Label playerTwoTemp = new Label("Image will go here");
-		playerTwoStuff = new VBox(30, playerLabelTwo, winningTwo, playerTwoTemp);
+		playerTwoStuff = new VBox(30, playerLabelTwo, playerTwoTemp, winningTwo);
 		ante2 = new Label("Ante");
 		anteTwo = new TextField();
 		ppw2 = new Label("PPW");
@@ -77,6 +80,7 @@ public class ThreeCardPokerGame extends Application {
 
 		message = new Label();
 		message.setText("Place ante and/or pair plus wager (PPW) between $5-25. Click bet to deal cards!");
+		message.setStyle("-fx-font-size: 25;" );
 		message.setAlignment(Pos.CENTER);
 
 		freshStart = new MenuItem("Fresh Start");
