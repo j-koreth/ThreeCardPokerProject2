@@ -4,7 +4,7 @@
 
 .headerLabels{
     -fx-text-fill: white;
-    -fx-background-color: firebrick;
+    -fx-background-color: black;
 }
 
 .menu-bar{
@@ -13,7 +13,7 @@
 }
 
 Button {
-    -fx-background-color: firebrick;
+    -fx-background-color: black;
     -fx-text-fill: white;
 }
 

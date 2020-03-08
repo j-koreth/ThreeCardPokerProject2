@@ -2,6 +2,7 @@ import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -52,12 +53,34 @@ public class ThreeCardPokerGame extends Application {
 		dealerPic.setFitWidth(150);
 		dealerPic.setPreserveRatio(true);
 
+		HBox dealerContainer = new HBox(30);
 		VBox dealerPicContainer = new VBox();
+
+		dealerCards = new HBox();
+		ImageView dealerCard1 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
+		ImageView dealerCard2 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
+		ImageView dealerCard3 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
+		VBox dealerCard1Container = new VBox();
+		VBox dealerCard2Container = new VBox();
+		VBox dealerCard3Container = new VBox();
+
+		setUpCards(dealerCard1Container, dealerCard1);
+		setUpCards(dealerCard2Container, dealerCard2);
+		setUpCards(dealerCard3Container, dealerCard3);
+
+		dealerCards.getChildren().add(dealerCard1Container);
+		dealerCards.getChildren().add(dealerCard2Container);
+		dealerCards.getChildren().add(dealerCard3Container);
+
 		dealerPicContainer.getChildren().add(dealerPic);
 		dealerPicContainer.getStyleClass().add("avatar");
+		dealerLabel.setPadding(new Insets(100));
+		dealerContainer.getChildren().addAll(dealerLabel, dealerPicContainer, dealerCards);
 
-		dealerStuff = new VBox(5, dealerLabel, dealerPicContainer);
-		dealerStuff.setAlignment(Pos.TOP_CENTER);
+//		dealerStuff = new VBox(10, dealerLabel, dealerContainer);
+
+		dealerContainer.setAlignment(Pos.CENTER_LEFT);
+
 
 		/*----------------------Design aspects for buttons-------------------------------*/
 		deal = new Button("Deal");
@@ -83,13 +106,31 @@ public class ThreeCardPokerGame extends Application {
 		playerOnePicContainer.getChildren().add(playerOnePic);
 		playerOnePicContainer.getStyleClass().add("avatar");
 
-		playerOneStuff = new VBox(30, playerLabelOne, playerOnePicContainer, winningOne);
+		playerOneStuff = new VBox(10, playerLabelOne, playerOnePicContainer, winningOne);
+		playerOneStuff.setAlignment(Pos.CENTER);
+
 		ante1 = new Label("Ante");
 		anteOne = new TextField("0");
 		ppw1 = new Label("PPW");
 		ppwOne = new TextField("0");
 		wager1 = new Label("Wager: $" + playerOne.playBet);
-		betsOne = new VBox(10, ante1, anteOne, ppw1, ppwOne, wager1);
+		playerOneCards = new HBox();
+		ImageView playerOneCard1 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
+		ImageView playerOneCard2 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
+		ImageView playerOneCard3 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
+		VBox playerOneCard1Container = new VBox();
+		VBox playerOneCard2Container = new VBox();
+		VBox playerOneCard3Container = new VBox();
+
+		setUpCards(playerOneCard1Container, playerOneCard1);
+		setUpCards(playerOneCard2Container, playerOneCard2);
+		setUpCards(playerOneCard3Container, playerOneCard3);
+
+		playerOneCards.getChildren().add(playerOneCard1Container);
+		playerOneCards.getChildren().add(playerOneCard2Container);
+		playerOneCards.getChildren().add(playerOneCard3Container);
+
+		betsOne = new VBox(10, ante1, anteOne, ppw1, ppwOne, wager1,playerOneCards);
 		playerOneAll = new HBox(10, betsOne, playerOneStuff);
 
 		/*----------------------Design aspects for Player2-------------------------------*/
@@ -106,7 +147,9 @@ public class ThreeCardPokerGame extends Application {
 		VBox playerTwoPicContainer = new VBox();
 		playerTwoPicContainer.getChildren().add(playerTwoPic);
 		playerTwoPicContainer.getStyleClass().add("avatar");
-		playerTwoStuff = new VBox(30, playerLabelTwo, playerTwoPicContainer, winningTwo);
+		playerTwoStuff = new VBox(10, playerLabelTwo, playerTwoPicContainer, winningTwo);
+		playerTwoStuff.setAlignment(Pos.CENTER);
+
 		ante2 = new Label("Ante");
 		anteTwo = new TextField("0");
 		anteTwo.setDisable(true);
@@ -114,7 +157,23 @@ public class ThreeCardPokerGame extends Application {
 		ppwTwo = new TextField("0");
 		ppwTwo.setDisable(true);
 		wager2 = new Label("Wager: $" + playerTwo.playBet);
-		betsTwo = new VBox(10, ante2, anteTwo, ppw2, ppwTwo, wager2);
+		playerTwoCards = new HBox();
+		ImageView playerTwoCard1 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
+		ImageView playerTwoCard2 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
+		ImageView playerTwoCard3 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
+		VBox playerTwoCard1Container = new VBox();
+		VBox playerTwoCard2Container = new VBox();
+		VBox playerTwoCard3Container = new VBox();
+
+		setUpCards(playerTwoCard1Container, playerTwoCard1);
+		setUpCards(playerTwoCard2Container, playerTwoCard2);
+		setUpCards(playerTwoCard3Container, playerTwoCard3);
+
+		playerTwoCards.getChildren().add(playerTwoCard1Container);
+		playerTwoCards.getChildren().add(playerTwoCard2Container);
+		playerTwoCards.getChildren().add(playerTwoCard3Container);
+
+		betsTwo = new VBox(10, ante2, anteTwo, ppw2, ppwTwo, wager2, playerTwoCards);
 		playerTwoAll = new HBox(10, playerTwoStuff, betsTwo);
 
 		/*----------------------Design aspects for message-------------------------------*/
@@ -131,7 +190,8 @@ public class ThreeCardPokerGame extends Application {
 		options.getItems().addAll(freshStart, newLook, exit);
 		menuBar = new MenuBar();
 		menuBar.getMenus().add(options);
-		HBox paneTop = new HBox(300, menuBar, dealerStuff);
+
+		HBox paneTop = new HBox(200, menuBar, dealerContainer);
 
 		/*----------------------Set pane for screen layout-------------------------------*/
 		pane.setTop(paneTop);
@@ -139,7 +199,7 @@ public class ThreeCardPokerGame extends Application {
 		pane.setRight(playerOneAll);
 		pane.setLeft(playerTwoAll);
 		pane.setBottom(message);
-		Scene scene = new Scene(pane, 1050,700);
+		Scene scene = new Scene(pane, 1150,700);
 		scene.getStylesheets().add("css/main.css");
 		scene.getStylesheets().add("css/default.css");
 
@@ -288,7 +348,12 @@ public class ThreeCardPokerGame extends Application {
 		});
 
 	}
-
+	void setUpCards(VBox vbox, ImageView card){
+		card.setFitHeight(100);
+		card.setFitWidth(65);
+		vbox.getChildren().add(card);
+		vbox.getStyleClass().add("card");
+	}
 	//Returns what the player won or lost from the pair plus wager
 	public int returnPpw (Player player) {
 		if (ThreeCardLogic.evalHand(player.hand) == 0) {
