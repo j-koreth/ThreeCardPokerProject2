@@ -204,10 +204,27 @@ public class ThreeCardPokerGame extends Application {
 		});
 
 //		/*----------------------Fold's actions-------------------------------*/
-//		fold.setOnAction(e-> {
-//			playerOne.totalWinnings -= (playerOne.anteBet + playerOne.playBet);
-//
-//		});
+		fold.setOnAction(e-> {
+
+			playerOne.totalWinnings -= (playerOne.anteBet + playerOne.playBet);
+			if (ThreeCardLogic.evalHand(playerOne.hand) == 0) {
+				playerOne.totalWinnings -= playerOne.pairPlusBet;
+			}
+			else {
+				playerOne.totalWinnings += ThreeCardLogic.evalPPWinnings(playerOne.hand, playerOne.pairPlusBet);
+			}
+
+			playerTwo.totalWinnings -= (playerTwo.anteBet + playerTwo.playBet);
+			if (ThreeCardLogic.evalHand(playerTwo.hand) == 0) {
+				playerTwo.totalWinnings -= playerTwo.pairPlusBet;
+			}
+			else {
+				playerTwo.totalWinnings += ThreeCardLogic.evalPPWinnings(playerTwo.hand, playerTwo.pairPlusBet);
+			}
+
+			winningOne.setText("Winnings: $" + playerOne.totalWinnings);
+			winningTwo.setText("Winnings: $" + playerTwo.totalWinnings);
+		});
 
 
 	}
