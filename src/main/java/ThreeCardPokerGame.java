@@ -17,15 +17,19 @@ import java.util.Random;
 public class ThreeCardPokerGame extends Application {
 	Player playerOne;
 	Player playerTwo;
+
 	Dealer theDealer;
-	VBox playerOneStuff, dealerStuff, playerTwoStuff, betsOne, betsTwo, buttonStuff;
-	HBox playerOneAll, playerTwoAll, playerOneCards, playerTwoCards, dealerCards;
+	Character dealer, playerOneCharacter, playerTwoCharacter;
+
+	VBox playerOneStuff, playerTwoStuff, betsOne, betsTwo, buttonStuff;
+	HBox dealerContainer;
+	HBox playerOneAll, playerTwoAll;
 	Button deal, bet, fold;
 	TextField anteOne, ppwOne, anteTwo, ppwTwo;
 	MenuBar menuBar;
 	Menu options;
 	MenuItem freshStart, newLook, exit;
-	Label playerLabelOne, playerLabelTwo, ante1, ppw1, wager1, ante2, ppw2, wager2, winningOne, winningTwo, message;
+	Label ante1, ppw1, wager1, ante2, ppw2, wager2, winningOne, winningTwo, message;
 	PauseTransition pause = new PauseTransition(Duration.seconds(2.0));
 	boolean newLookInUse = false;
 
@@ -45,14 +49,10 @@ public class ThreeCardPokerGame extends Application {
 		/*----------------------Design aspects for dealer-------------------------------*/
 		theDealer = new Dealer();
 
-		HBox dealerContainer = new HBox(30);
 
-		Character dealer = new Character("player_avatars/han-enter-the-dragon (2).jpg","JPEG/Yellow_back.jpg", "Dealer");
+		dealer = new Character("player_avatars/han-enter-the-dragon (2).jpg","JPEG/Yellow_back.jpg", "Dealer");
 
-		dealerCards = new HBox();
-		dealerCards.getChildren().addAll(dealer.getBackCards());
-
-		dealerContainer.getChildren().addAll(dealer.getName(), dealer.getImage(), dealerCards);
+		dealerContainer = new HBox(30, dealer.name, dealer.characterAvatar, dealer.cardContainer);
 
 		dealerContainer.setAlignment(Pos.CENTER_LEFT);
 
@@ -70,18 +70,11 @@ public class ThreeCardPokerGame extends Application {
 		playerOne = new Player();
 		winningOne = new Label("Winnings: $" + playerOne.totalWinnings);
 		winningOne.getStyleClass().add("headerLabels");
-		playerLabelOne = new Label("Player 1");
-		playerLabelOne.getStyleClass().add("headerLabels");
-		ImageView playerOnePic = new ImageView(new Image("player_avatars/bruce-lee.jpg"));
-		playerOnePic.setFitHeight(175);
-		playerOnePic.setFitWidth(150);
-		playerOnePic.setPreserveRatio(true);
 
-		VBox playerOnePicContainer = new VBox();
-		playerOnePicContainer.getChildren().add(playerOnePic);
-		playerOnePicContainer.getStyleClass().add("avatar");
+		playerOneCharacter = new Character("player_avatars/bruce-lee.jpg","JPEG/Yellow_back.jpg", "Dealer");
 
-		playerOneStuff = new VBox(10, playerLabelOne, playerOnePicContainer, winningOne);
+		playerOneStuff = new VBox(10, playerOneCharacter.name, playerOneCharacter.characterAvatar, winningOne);
+
 		playerOneStuff.setAlignment(Pos.CENTER);
 
 		ante1 = new Label("Ante");
@@ -89,40 +82,18 @@ public class ThreeCardPokerGame extends Application {
 		ppw1 = new Label("PPW");
 		ppwOne = new TextField("0");
 		wager1 = new Label("Wager: $" + playerOne.playBet);
-		playerOneCards = new HBox();
-		ImageView playerOneCard1 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
-		ImageView playerOneCard2 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
-		ImageView playerOneCard3 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
-		VBox playerOneCard1Container = new VBox();
-		VBox playerOneCard2Container = new VBox();
-		VBox playerOneCard3Container = new VBox();
 
-		setUpCards(playerOneCard1Container, playerOneCard1);
-		setUpCards(playerOneCard2Container, playerOneCard2);
-		setUpCards(playerOneCard3Container, playerOneCard3);
-
-		playerOneCards.getChildren().add(playerOneCard1Container);
-		playerOneCards.getChildren().add(playerOneCard2Container);
-		playerOneCards.getChildren().add(playerOneCard3Container);
-
-		betsOne = new VBox(10, ante1, anteOne, ppw1, ppwOne, wager1,playerOneCards);
+		betsOne = new VBox(10, ante1, anteOne, ppw1, ppwOne, wager1,playerOneCharacter.cardContainer);
 		playerOneAll = new HBox(10, betsOne, playerOneStuff);
 
 		/*----------------------Design aspects for Player2-------------------------------*/
 		playerTwo = new Player();
 		winningTwo = new Label("Winnings: $" + playerTwo.totalWinnings);
 		winningTwo.getStyleClass().add("headerLabels");
-		playerLabelTwo = new Label("Player 2");
-		playerLabelTwo.getStyleClass().add("headerLabels");
-		ImageView playerTwoPic = new ImageView(new Image("player_avatars/jim-kelly-enter-the-dragon (2).jpg"));
-		playerTwoPic.setFitHeight(175);
-		playerTwoPic.setFitWidth(150);
-		playerTwoPic.setPreserveRatio(true);
+		playerTwoCharacter = new Character("player_avatars/jim-kelly-enter-the-dragon (2).jpg","JPEG/Yellow_back.jpg", "Dealer");
 
-		VBox playerTwoPicContainer = new VBox();
-		playerTwoPicContainer.getChildren().add(playerTwoPic);
-		playerTwoPicContainer.getStyleClass().add("avatar");
-		playerTwoStuff = new VBox(10, playerLabelTwo, playerTwoPicContainer, winningTwo);
+
+		playerTwoStuff = new VBox(10, playerTwoCharacter.name, playerTwoCharacter.characterAvatar, winningTwo);
 		playerTwoStuff.setAlignment(Pos.CENTER);
 
 		ante2 = new Label("Ante");
@@ -132,23 +103,8 @@ public class ThreeCardPokerGame extends Application {
 		ppwTwo = new TextField("0");
 		ppwTwo.setDisable(true);
 		wager2 = new Label("Wager: $" + playerTwo.playBet);
-		playerTwoCards = new HBox();
-		ImageView playerTwoCard1 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
-		ImageView playerTwoCard2 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
-		ImageView playerTwoCard3 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
-		VBox playerTwoCard1Container = new VBox();
-		VBox playerTwoCard2Container = new VBox();
-		VBox playerTwoCard3Container = new VBox();
 
-		setUpCards(playerTwoCard1Container, playerTwoCard1);
-		setUpCards(playerTwoCard2Container, playerTwoCard2);
-		setUpCards(playerTwoCard3Container, playerTwoCard3);
-
-		playerTwoCards.getChildren().add(playerTwoCard1Container);
-		playerTwoCards.getChildren().add(playerTwoCard2Container);
-		playerTwoCards.getChildren().add(playerTwoCard3Container);
-
-		betsTwo = new VBox(10, ante2, anteTwo, ppw2, ppwTwo, wager2, playerTwoCards);
+		betsTwo = new VBox(10, ante2, anteTwo, ppw2, ppwTwo, wager2, playerTwoCharacter.cardContainer);
 		playerTwoAll = new HBox(10, playerTwoStuff, betsTwo);
 
 
@@ -216,16 +172,18 @@ public class ThreeCardPokerGame extends Application {
 			if (!newLookInUse) {
 				scene.getStylesheets().remove("css/main.css");
 				scene.getStylesheets().add("css/alternative.css");
-				dealer.changeTheme("player_avatars/broly.jpeg", "JPEG/Red_back.jpg");
-				playerOnePic.setImage(new Image("player_avatars/goku.jpeg"));
-				playerTwoPic.setImage(new Image("player_avatars/vegeta.jpeg"));
+
+				dealer.changeTheme("player_avatars/broly.jpeg", "JPEG/purple_back.jpg");
+
+				playerOneCharacter.changeTheme("player_avatars/goku.jpeg", "JPEG/purple_back.jpg");
+				playerTwoCharacter.changeTheme("player_avatars/vegeta.jpeg", "JPEG/purple_back.jpg");
 			}
 			else{
 				scene.getStylesheets().remove("css/alternative.css");
 				scene.getStylesheets().add("css/main.css");
 				dealer.changeTheme("player_avatars/han-enter-the-dragon (2).jpg", "JPEG/Yellow_back.jpg");
-				playerOnePic.setImage(new Image("player_avatars/bruce-lee.jpg"));
-				playerTwoPic.setImage(new Image("player_avatars/jim-kelly-enter-the-dragon (2).jpg"));
+				playerOneCharacter.changeTheme("player_avatars/bruce-lee.jpg", "JPEG/Yellow_back.jpg");
+				playerTwoCharacter.changeTheme("player_avatars/jim-kelly-enter-the-dragon (2).jpg", "JPEG/Yellow_back.jpg");
 			}
 
 			newLookInUse = !newLookInUse;
@@ -332,6 +290,7 @@ public class ThreeCardPokerGame extends Application {
 		});
 
 	}
+
 	void setUpCards(VBox vbox, ImageView card){
 		card.setFitHeight(100);
 		card.setFitWidth(65);
