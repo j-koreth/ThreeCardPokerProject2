@@ -43,7 +43,6 @@ public class ThreeCardPokerGame extends Application {
 
 		BorderPane pane = new BorderPane();
 		pane.setPadding(new Insets(70));
-		System.out.println(		Font.getFamilies());
 		/*----------------------Design aspects for dealer-------------------------------*/
 		dealerLabel = new Label("Dealer");
 		dealerLabel.getStyleClass().add("headerLabels");
@@ -62,7 +61,7 @@ public class ThreeCardPokerGame extends Application {
 
 		/*----------------------Design aspects for buttons-------------------------------*/
 		deal = new Button("Deal");
-		bet = new Button("BET");
+		bet = new Button("Bet");
 		bet.setDisable(true);
 		fold = new Button("Fold");
 		fold.setDisable(true);
@@ -100,8 +99,16 @@ public class ThreeCardPokerGame extends Application {
 		winningTwo.getStyleClass().add("headerLabels");
 		playerLabelTwo = new Label("Player 2");
 		playerLabelTwo.getStyleClass().add("headerLabels");
-		Label playerTwoTemp = new Label("Image will go here");
-		playerTwoStuff = new VBox(30, playerLabelTwo, playerTwoTemp, winningTwo);
+		Image jim = new Image("player_avatars/jim-kelly-enter-the-dragon (2).jpg");
+		ImageView playerTwoPic = new ImageView(jim);
+		playerTwoPic.setFitHeight(175);
+		playerTwoPic.setFitWidth(150);
+		playerTwoPic.setPreserveRatio(true);
+
+		VBox playerTwoPicContainer = new VBox();
+		playerTwoPicContainer.getChildren().add(playerTwoPic);
+		playerTwoPicContainer.getStyleClass().add("avatar");
+		playerTwoStuff = new VBox(30, playerLabelTwo, playerTwoPicContainer, winningTwo);
 		ante2 = new Label("Ante");
 		anteTwo = new TextField("0");
 		anteTwo.setDisable(true);
@@ -125,7 +132,6 @@ public class ThreeCardPokerGame extends Application {
 		options = new Menu("Options");
 		options.getItems().addAll(freshStart, newLook, exit);
 		menuBar = new MenuBar();
-		menuBar.setStyle("-fx-background-color: firebrick;");
 		menuBar.getMenus().add(options);
 		HBox paneTop = new HBox(300, menuBar, dealerStuff);
 
