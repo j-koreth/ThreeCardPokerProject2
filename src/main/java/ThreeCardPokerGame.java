@@ -44,6 +44,7 @@ public class ThreeCardPokerGame extends Application {
 		BorderPane pane = new BorderPane();
 		pane.setPadding(new Insets(70));
 		/*----------------------Design aspects for dealer-------------------------------*/
+		theDealer = new Dealer();
 		dealerLabel = new Label("Dealer");
 		dealerLabel.getStyleClass().add("headerLabels");
 		Image pic = new Image("player_avatars/han-enter-the-dragon (2).jpg");
@@ -147,7 +148,12 @@ public class ThreeCardPokerGame extends Application {
 		primaryStage.show();
 
 		/*----------------------Menu item's actions-------------------------------*/
-		freshStart.setOnAction(e -> {playerOne.totalWinnings = 0; playerTwo.totalWinnings = 0;});
+		freshStart.setOnAction(e -> {
+			playerOne.totalWinnings = 0;
+			playerTwo.totalWinnings = 0;
+			winningOne.setText("Winnings: $" + playerOne.totalWinnings);
+			winningTwo.setText("Winnings: $" + playerTwo.totalWinnings);
+		});
 
 		newLook.setOnAction(e->{pane.setStyle("-fx-background-color: DARKOLIVEGREEN;" + "-fx-border-color: DARKMAGENTA;"+
 				"-fx-border-width: 10;");
@@ -198,36 +204,60 @@ public class ThreeCardPokerGame extends Application {
 					deal.setDisable(true);
 					bet.setDisable(false);
 					fold.setDisable(false);
+
+					Label dealMessage = new Label("Click Bet to bet wager or click Fold to stop playing.");
+					pane.setBottom(dealMessage);
+
 					playerOne.hand = theDealer.dealHand();
 					playerTwo.hand = theDealer.dealHand();
 					theDealer.dealersHand = theDealer.dealHand();
+
 				}
 		});
 
-//		/*----------------------Fold's actions-------------------------------*/
+		/*----------------------Fold's actions-------------------------------*/
 		fold.setOnAction(e-> {
 
-			playerOne.totalWinnings -= (playerOne.anteBet + playerOne.playBet);
-			if (ThreeCardLogic.evalHand(playerOne.hand) == 0) {
-				playerOne.totalWinnings -= playerOne.pairPlusBet;
-			}
-			else {
-				playerOne.totalWinnings += ThreeCardLogic.evalPPWinnings(playerOne.hand, playerOne.pairPlusBet);
-			}
+			playerOne.totalWinnings -= playerOne.anteBet;
+			playerOne.totalWinnings = returnPpw(playerOne);
 
-			playerTwo.totalWinnings -= (playerTwo.anteBet + playerTwo.playBet);
-			if (ThreeCardLogic.evalHand(playerTwo.hand) == 0) {
-				playerTwo.totalWinnings -= playerTwo.pairPlusBet;
-			}
-			else {
-				playerTwo.totalWinnings += ThreeCardLogic.evalPPWinnings(playerTwo.hand, playerTwo.pairPlusBet);
-			}
+			playerTwo.totalWinnings -= playerTwo.anteBet;
+			playerTwo.totalWinnings = returnPpw(playerTwo);
 
 			winningOne.setText("Winnings: $" + playerOne.totalWinnings);
 			winningTwo.setText("Winnings: $" + playerTwo.totalWinnings);
+			deal.setDisable(false);
+			fold.setDisable(true);
+			bet.setDisable(true);
+			anteOne.setDisable(false);
+			ppwOne.setDisable(false);
+			pane.setBottom(message);
 		});
 
+		/*----------------------Bet's actions-------------------------------*/
+		bet.setOnAction(e-> {
+			if (ThreeCardLogic.compareHands(theDealer.dealersHand, playerOne.hand) == 1) {
+				playerOne.totalWinnings -= (playerOne.anteBet * 2);
+				playerOne.totalWinnings = returnPpw(playerOne);
+			}
+			else if (ThreeCardLogic.compareHands(theDealer.dealersHand, playerOne.hand) == 2) {
+				playerOne.totalWinnings += (playerOne.anteBet * 4);
+				playerOne.totalWinnings = returnPpw(playerOne);
+			}
+			else {
+				playerOne.totalWinnings = returnPpw(playerOne);
+			}
+		});
 
 	}
 
+	public int returnPpw (Player player) {
+		if (ThreeCardLogic.evalHand(player.hand) == 0) {
+			player.totalWinnings -= player.pairPlusBet;
+		}
+		else {
+			player.totalWinnings += ThreeCardLogic.evalPPWinnings(player.hand, player.pairPlusBet);
+		}
+		return player.totalWinnings;
+	}
 }
