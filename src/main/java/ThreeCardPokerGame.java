@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -46,8 +45,8 @@ public class ThreeCardPokerGame extends Application {
 
 		/*----------------------Design aspects for dealer-------------------------------*/
 		dealerLabel = new Label("Dealer");
-		dealerLabel.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: firebrick;");
-		Image pic = new Image("/player_avatars/han-enter-the-dragon (2).jpg");
+		dealerLabel.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: orangered;");
+		Image pic = new Image("file:src/main/java/resources/player_avatars/han-enter-the-dragon (2).jpg");
 		ImageView dealerPic = new ImageView(pic);
 		dealerPic.setFitHeight(100);
 		dealerPic.setFitWidth(100);
@@ -57,12 +56,12 @@ public class ThreeCardPokerGame extends Application {
 
 		/*----------------------Design aspects for buttons-------------------------------*/
 		deal = new Button("Deal");
-		deal.setStyle("-fx-background-color: firebrick;");
+		deal.setStyle("-fx-background-color: orangered;");
 		bet = new Button("BET");
-		bet.setStyle("-fx-background-color: firebrick;");
+		bet.setStyle("-fx-background-color: orangered;");
 		bet.setDisable(true);
 		fold = new Button("Fold");
-		fold.setStyle("-fx-background-color: firebrick;");
+		fold.setStyle("-fx-background-color: orangered;");
 		fold.setDisable(true);
 		buttonStuff = new VBox(30, deal, bet, fold);
 		buttonStuff.setAlignment(Pos.CENTER);
@@ -70,19 +69,11 @@ public class ThreeCardPokerGame extends Application {
 		/*----------------------Design aspects for Player1-------------------------------*/
 		playerOne = new Player();
 		winningOne = new Label("Winnings: $" + playerOne.totalWinnings);
-		winningOne.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: firebrick;");
+		winningOne.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: orangered;");
 		playerLabelOne = new Label("Player 1");
-		playerLabelOne.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: firebrick;");
-//		Label playerOneTemp = new Label("Image will go here");
-		ImageView playerOneTemp = new ImageView("/player_avatars/bruce-lee.jpg");
-
-		VBox vBox = new VBox();
-		vBox.getChildren().add(playerOneTemp);
-		playerOneTemp.setFitHeight(175);
-		playerOneTemp.setFitWidth(150);
-		vBox.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-padding: 10; -fx-background-color: firebrick; -fx-background-radius: 5;");
-
-		playerOneStuff = new VBox(30, playerLabelOne, vBox, winningOne);
+		playerLabelOne.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: orangered;");
+		Label playerOneTemp = new Label("Image will go here");
+		playerOneStuff = new VBox(30, playerLabelOne, playerOneTemp, winningOne);
 		ante1 = new Label("Ante");
 		anteOne = new TextField("0");
 		ppw1 = new Label("PPW");
@@ -95,9 +86,9 @@ public class ThreeCardPokerGame extends Application {
 		/*----------------------Design aspects for Player2-------------------------------*/
 		playerTwo = new Player();
 		winningTwo = new Label("Winnings: $" + playerTwo.totalWinnings);
-		winningTwo.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: firebrick;");
+		winningTwo.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: orangered;");
 		playerLabelTwo = new Label("Player 2");
-		playerLabelTwo.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: firebrick;");
+		playerLabelTwo.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: orangered;");
 		Label playerTwoTemp = new Label("Image will go here");
 		playerTwoStuff = new VBox(30, playerLabelTwo, playerTwoTemp, winningTwo);
 		ante2 = new Label("Ante");
@@ -122,7 +113,7 @@ public class ThreeCardPokerGame extends Application {
 		options = new Menu("Options");
 		options.getItems().addAll(freshStart, newLook, exit);
 		menuBar = new MenuBar();
-		menuBar.setStyle("-fx-background-color: firebrick;");
+		menuBar.setStyle("-fx-background-color: red;");
 		menuBar.getMenus().add(options);
 		HBox paneTop = new HBox(300, menuBar, dealerStuff);
 
@@ -163,9 +154,10 @@ public class ThreeCardPokerGame extends Application {
 
 			pause.play();
 
-			if ((playerAnte1 < 5 || playerAnte1 > 25) || ((playerAnte2 < 5 || playerAnte2 > 25) )) {
-				message.setText("Please place a bet between $5-25.");
-				message.setAlignment(Pos.CENTER);
+			if (((playerAnte1 < 5 || playerAnte1 > 25) && (playerAnte1 != 0)) ||
+					((playerAnte2 < 5 || playerAnte2 > 25) && (playerAnte2 != 0))) {
+				Label anteMessage = new Label("Please place a bet between $5-25.");
+				pane.setBottom(anteMessage);
 			}
 		});
 
