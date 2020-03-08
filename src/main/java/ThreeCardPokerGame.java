@@ -2,7 +2,6 @@ import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -211,8 +210,20 @@ public class ThreeCardPokerGame extends Application {
 		freshStart.setOnAction(e -> {
 			playerOne.totalWinnings = 0;
 			playerTwo.totalWinnings = 0;
+			playerOne.anteBet = 0;
+			playerTwo.anteBet = 0;
+			playerOne.pairPlusBet = 0;
+			playerTwo.pairPlusBet = 0;
+			playerOne.playBet = 0;
+			playerTwo.playBet = 0;
 			winningOne.setText("Winnings: $" + playerOne.totalWinnings);
 			winningTwo.setText("Winnings: $" + playerTwo.totalWinnings);
+			anteOne.setText("0");
+			anteTwo.setText("0");
+			ppwOne.setText("0");
+			ppwTwo.setText("0");
+			wager1 = new Label("Wager: $" + playerOne.playBet);
+			wager2 = new Label("Wager: $" + playerTwo.playBet);
 		});
 
 		newLook.setOnAction(e->{
