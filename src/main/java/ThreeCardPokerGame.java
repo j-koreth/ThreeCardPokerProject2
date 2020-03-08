@@ -9,7 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -120,7 +119,7 @@ public class ThreeCardPokerGame extends Application {
 
 		/*----------------------Design aspects for message-------------------------------*/
 		message = new Label();
-		message.setText("Place ante and/or pair plus wager (PPW) between $5-25. Click bet to deal cards! Leaving ante as $0 will place a random bet.");
+		message.setText("Place ante and/or optional pair plus wager (PPW) between $5-25. Click bet to deal cards!");
 		message.setStyle("-fx-font-size: 16;" );
 		message.setAlignment(Pos.CENTER);
 
@@ -175,8 +174,8 @@ public class ThreeCardPokerGame extends Application {
 			ppwTwo.setText("" + playerPpw2);
 			pause.play();
 
-			if ((playerAnte1 < 5 || playerAnte1 > 25) || (playerAnte2 < 5 || playerAnte2 > 25)) {
-				Label anteMessage = new Label("Please place a bet between $5-25.");
+			if ((playerAnte1 < 5 || playerAnte1 > 25) || ((playerPpw1 < 5 || playerPpw1 >25) && (playerPpw1 != 0 ))) {
+				Label anteMessage = new Label("Please place a bet and/or optional PPW between $5-25.");
 				pane.setBottom(anteMessage);
 			}
 			else {
@@ -195,9 +194,20 @@ public class ThreeCardPokerGame extends Application {
 					wager1.setText("Wager: $" + playerOne.playBet);
 					wager2.setText("Wager: $" + playerTwo.playBet);
 
-
+					deal.setDisable(true);
+					bet.setDisable(false);
+					fold.setDisable(false);
+					playerOne.hand = theDealer.dealHand();
+					playerTwo.hand = theDealer.dealHand();
+					theDealer.dealersHand = theDealer.dealHand();
 				}
 		});
+
+//		/*----------------------Fold's actions-------------------------------*/
+//		fold.setOnAction(e-> {
+//			playerOne.totalWinnings -= (playerOne.anteBet + playerOne.playBet);
+//
+//		});
 
 
 	}
