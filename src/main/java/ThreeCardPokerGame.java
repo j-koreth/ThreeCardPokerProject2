@@ -47,8 +47,7 @@ public class ThreeCardPokerGame extends Application {
 		theDealer = new Dealer();
 		dealerLabel = new Label("Dealer");
 		dealerLabel.getStyleClass().add("headerLabels");
-		Image pic = new Image("player_avatars/han-enter-the-dragon (2).jpg");
-		ImageView dealerPic = new ImageView(pic);
+		ImageView dealerPic = new ImageView(new Image("player_avatars/han-enter-the-dragon (2).jpg"));
 		dealerPic.setFitHeight(175);
 		dealerPic.setFitWidth(150);
 		dealerPic.setPreserveRatio(true);
@@ -75,8 +74,7 @@ public class ThreeCardPokerGame extends Application {
 		winningOne.getStyleClass().add("headerLabels");
 		playerLabelOne = new Label("Player 1");
 		playerLabelOne.getStyleClass().add("headerLabels");
-		Image bruce = new Image("player_avatars/bruce-lee.jpg");
-		ImageView playerOnePic = new ImageView(bruce);
+		ImageView playerOnePic = new ImageView(new Image("player_avatars/bruce-lee.jpg"));
 		playerOnePic.setFitHeight(175);
 		playerOnePic.setFitWidth(150);
 		playerOnePic.setPreserveRatio(true);
@@ -100,8 +98,7 @@ public class ThreeCardPokerGame extends Application {
 		winningTwo.getStyleClass().add("headerLabels");
 		playerLabelTwo = new Label("Player 2");
 		playerLabelTwo.getStyleClass().add("headerLabels");
-		Image jim = new Image("player_avatars/jim-kelly-enter-the-dragon (2).jpg");
-		ImageView playerTwoPic = new ImageView(jim);
+		ImageView playerTwoPic = new ImageView(new Image("player_avatars/jim-kelly-enter-the-dragon (2).jpg"));
 		playerTwoPic.setFitHeight(175);
 		playerTwoPic.setFitWidth(150);
 		playerTwoPic.setPreserveRatio(true);
@@ -161,11 +158,16 @@ public class ThreeCardPokerGame extends Application {
 			if (!newLookInUse) {
 				scene.getStylesheets().remove("css/main.css");
 				scene.getStylesheets().add("css/alternative.css");
-				Image pic = new Image("player_avatars/han-enter-the-dragon (2).jpg");
+				dealerPic.setImage(new Image("player_avatars/broly.jpeg"));
+				playerOnePic.setImage(new Image("player_avatars/goku.jpeg"));
+				playerTwoPic.setImage(new Image("player_avatars/vegeta.jpeg"));
 			}
 			else{
 				scene.getStylesheets().remove("css/alternative.css");
 				scene.getStylesheets().add("css/main.css");
+				dealerPic.setImage(new Image("player_avatars/han-enter-the-dragon (2).jpg"));
+				playerOnePic.setImage(new Image("player_avatars/bruce-lee.jpg"));
+				playerTwoPic.setImage(new Image("player_avatars/jim-kelly-enter-the-dragon (2).jpg"));
 			}
 
 			newLookInUse = !newLookInUse;
