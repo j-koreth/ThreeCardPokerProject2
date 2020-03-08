@@ -18,7 +18,7 @@ public class ThreeCardPokerGame extends Application {
 	Player playerTwo;
 	Dealer theDealer;
 	VBox playerOneStuff, dealerStuff, playerTwoStuff, betsOne, betsTwo, buttonStuff;
-	HBox playerOneAll, playerTwoAll, playerONeCards, playerTwoCards, dealerCards;
+	HBox playerOneAll, playerTwoAll, playerOneCards, playerTwoCards, dealerCards;
 	Button deal, bet, fold;
 	TextField anteOne, ppwOne, wagerOne, anteTwo, ppwTwo, wagerTwo;
 	MenuBar menuBar;
