@@ -1,0 +1,16 @@
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+
+public class CardGui {
+    VBox card;
+    public CardGui(String picUrl){
+        ImageView pic = new ImageView(new Image(picUrl));
+        card = new VBox();
+
+        pic.setFitHeight(100);
+        pic.setFitWidth(65);
+        card.getChildren().add(pic);
+        card.getStyleClass().add("card");
+    }
+}

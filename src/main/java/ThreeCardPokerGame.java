@@ -25,7 +25,7 @@ public class ThreeCardPokerGame extends Application {
 	MenuBar menuBar;
 	Menu options;
 	MenuItem freshStart, newLook, exit;
-	Label dealerLabel, playerLabelOne, playerLabelTwo, ante1, ppw1, wager1, ante2, ppw2, wager2, winningOne, winningTwo, message;
+	Label playerLabelOne, playerLabelTwo, ante1, ppw1, wager1, ante2, ppw2, wager2, winningOne, winningTwo, message;
 	PauseTransition pause = new PauseTransition(Duration.seconds(2.0));
 	boolean newLookInUse = false;
 
@@ -44,38 +44,15 @@ public class ThreeCardPokerGame extends Application {
 		pane.setPadding(new Insets(70));
 		/*----------------------Design aspects for dealer-------------------------------*/
 		theDealer = new Dealer();
-		dealerLabel = new Label("Dealer");
-		dealerLabel.getStyleClass().add("headerLabels");
-		ImageView dealerPic = new ImageView(new Image("player_avatars/han-enter-the-dragon (2).jpg"));
-		dealerPic.setFitHeight(175);
-		dealerPic.setFitWidth(150);
-		dealerPic.setPreserveRatio(true);
 
 		HBox dealerContainer = new HBox(30);
-		VBox dealerPicContainer = new VBox();
+
+		Character dealer = new Character("player_avatars/han-enter-the-dragon (2).jpg","JPEG/Yellow_back.jpg", "Dealer");
 
 		dealerCards = new HBox();
-		ImageView dealerCard1 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
-		ImageView dealerCard2 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
-		ImageView dealerCard3 = new ImageView(new Image("JPEG/Yellow_back.jpg"));
-		VBox dealerCard1Container = new VBox();
-		VBox dealerCard2Container = new VBox();
-		VBox dealerCard3Container = new VBox();
+		dealerCards.getChildren().addAll(dealer.getBackCards());
 
-		setUpCards(dealerCard1Container, dealerCard1);
-		setUpCards(dealerCard2Container, dealerCard2);
-		setUpCards(dealerCard3Container, dealerCard3);
-
-		dealerCards.getChildren().add(dealerCard1Container);
-		dealerCards.getChildren().add(dealerCard2Container);
-		dealerCards.getChildren().add(dealerCard3Container);
-
-		dealerPicContainer.getChildren().add(dealerPic);
-		dealerPicContainer.getStyleClass().add("avatar");
-		dealerLabel.setPadding(new Insets(100));
-		dealerContainer.getChildren().addAll(dealerLabel, dealerPicContainer, dealerCards);
-
-//		dealerStuff = new VBox(10, dealerLabel, dealerContainer);
+		dealerContainer.getChildren().addAll(dealer.getName(), dealer.getImage(), dealerCards);
 
 		dealerContainer.setAlignment(Pos.CENTER_LEFT);
 
@@ -239,14 +216,14 @@ public class ThreeCardPokerGame extends Application {
 			if (!newLookInUse) {
 				scene.getStylesheets().remove("css/main.css");
 				scene.getStylesheets().add("css/alternative.css");
-				dealerPic.setImage(new Image("player_avatars/broly.jpeg"));
+				dealer.changeTheme("player_avatars/broly.jpeg", "JPEG/Red_back.jpg");
 				playerOnePic.setImage(new Image("player_avatars/goku.jpeg"));
 				playerTwoPic.setImage(new Image("player_avatars/vegeta.jpeg"));
 			}
 			else{
 				scene.getStylesheets().remove("css/alternative.css");
 				scene.getStylesheets().add("css/main.css");
-				dealerPic.setImage(new Image("player_avatars/han-enter-the-dragon (2).jpg"));
+				dealer.changeTheme("player_avatars/han-enter-the-dragon (2).jpg", "JPEG/Yellow_back.jpg");
 				playerOnePic.setImage(new Image("player_avatars/bruce-lee.jpg"));
 				playerTwoPic.setImage(new Image("player_avatars/jim-kelly-enter-the-dragon (2).jpg"));
 			}
