@@ -57,8 +57,7 @@ public class ThreeCardPokerGame extends Application {
 
 		VBox dealerPicContainer = new VBox();
 		dealerPicContainer.getChildren().add(dealerPic);
-		dealerPicContainer.setStyle("-fx-padding: 10;\n" +
-				"-fx-background-color: firebrick;-fx-background-radius: 5;\n-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);\n");
+		dealerPicContainer.getStyleClass().add("avatar");
 
 		dealerStuff = new VBox(5, dealerLabel, dealerPicContainer);
 		dealerStuff.setAlignment(Pos.TOP_CENTER);
@@ -89,8 +88,8 @@ public class ThreeCardPokerGame extends Application {
 
 		VBox playerOnePicContainer = new VBox();
 		playerOnePicContainer.getChildren().add(playerOnePic);
-		playerOnePicContainer.setStyle("-fx-padding: 10;\n" +
-				"-fx-background-color: firebrick;-fx-background-radius: 5;\n-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);\n");
+		playerOnePicContainer.getStyleClass().add("avatar");
+
 		playerOneStuff = new VBox(30, playerLabelOne, playerOnePicContainer, winningOne);
 		ante1 = new Label("Ante");
 		anteOne = new TextField("0");
