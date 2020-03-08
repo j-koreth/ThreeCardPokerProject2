@@ -8,3 +8,19 @@
     -fx-background-radius: 5;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
+
+.headerLabels{
+    -fx-font-size: 20;
+    -fx-border-size: 40;
+    -fx-border-color: firebrick;
+}
+
+Button {
+    -fx-background-color: firebrick;
+}
+
+BorderPane {
+    -fx-background-color: gold;
+    -fx-border-color: black;
+    -fx-border-width: 10;
+}

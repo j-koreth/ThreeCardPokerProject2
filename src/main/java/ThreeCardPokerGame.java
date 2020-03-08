@@ -43,12 +43,10 @@ public class ThreeCardPokerGame extends Application {
 
 		BorderPane pane = new BorderPane();
 		pane.setPadding(new Insets(70));
-		pane.setStyle("-fx-background-color: gold;" + "-fx-border-color: black;"+
-				"-fx-border-width: 10;");
 		System.out.println(		Font.getFamilies());
 		/*----------------------Design aspects for dealer-------------------------------*/
 		dealerLabel = new Label("Dealer");
-		dealerLabel.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: firebrick;");
+		dealerLabel.getStyleClass().add("headerLabels");
 		Image pic = new Image("player_avatars/han-enter-the-dragon (2).jpg");
 		ImageView dealerPic = new ImageView(pic);
 		dealerPic.setFitHeight(175);
@@ -64,12 +62,9 @@ public class ThreeCardPokerGame extends Application {
 
 		/*----------------------Design aspects for buttons-------------------------------*/
 		deal = new Button("Deal");
-		deal.setStyle("-fx-background-color: firebrick;");
 		bet = new Button("BET");
-		bet.setStyle("-fx-background-color: firebrick;");
 		bet.setDisable(true);
 		fold = new Button("Fold");
-		fold.setStyle("-fx-background-color: firebrick;");
 		fold.setDisable(true);
 		buttonStuff = new VBox(30, deal, bet, fold);
 		buttonStuff.setAlignment(Pos.CENTER);
@@ -77,9 +72,9 @@ public class ThreeCardPokerGame extends Application {
 		/*----------------------Design aspects for Player1-------------------------------*/
 		playerOne = new Player();
 		winningOne = new Label("Winnings: $" + playerOne.totalWinnings);
-		winningOne.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: firebrick;");
+		winningOne.getStyleClass().add("headerLabels");
 		playerLabelOne = new Label("Player 1");
-		playerLabelOne.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: firebrick;");
+		playerLabelOne.getStyleClass().add("headerLabels");
 		Image bruce = new Image("player_avatars/bruce-lee.jpg");
 		ImageView playerOnePic = new ImageView(bruce);
 		playerOnePic.setFitHeight(175);
@@ -102,9 +97,9 @@ public class ThreeCardPokerGame extends Application {
 		/*----------------------Design aspects for Player2-------------------------------*/
 		playerTwo = new Player();
 		winningTwo = new Label("Winnings: $" + playerTwo.totalWinnings);
-		winningTwo.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: firebrick;");
+		winningTwo.getStyleClass().add("headerLabels");
 		playerLabelTwo = new Label("Player 2");
-		playerLabelTwo.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: firebrick;");
+		playerLabelTwo.getStyleClass().add("headerLabels");
 		Label playerTwoTemp = new Label("Image will go here");
 		playerTwoStuff = new VBox(30, playerLabelTwo, playerTwoTemp, winningTwo);
 		ante2 = new Label("Ante");
