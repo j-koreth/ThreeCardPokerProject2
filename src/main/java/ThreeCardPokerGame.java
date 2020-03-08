@@ -145,7 +145,6 @@ public class ThreeCardPokerGame extends Application {
 		scene.getStylesheets().add("css/main.css");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		Font.getFamilies().forEach(System.out::println);
 
 		/*----------------------Menu item's actions-------------------------------*/
 		freshStart.setOnAction(e -> {playerOne.totalWinnings = 0; playerTwo.totalWinnings = 0;});
