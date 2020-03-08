@@ -33,6 +33,9 @@ class ThreeCardTest {
 	Player testPlayer17 = new Player();
 	Dealer testDealer18 = new Dealer();
 	Player testPlayer18 = new Player();
+	Dealer testDealer19 = new Dealer();
+	Player testPlayer19 = new Player();
+
 
 	@Test
 	void logicTest1(){
@@ -534,6 +537,11 @@ class ThreeCardTest {
 		testDealer18.dealersHand.clear();
 		testPlayer18.hand.clear();
 
+	}
+
+	@Test
+	void logicTest19() //Check to make sure basic game play works
+	{
 
 	}
 }
