@@ -20,7 +20,7 @@ public class ThreeCardPokerGame extends Application {
 	VBox playerOneStuff, dealerStuff, playerTwoStuff, betsOne, betsTwo, buttonStuff;
 	HBox playerOneAll, playerTwoAll, playerOneCards, playerTwoCards, dealerCards;
 	Button deal, bet, fold;
-	TextField anteOne, ppwOne, wagerOne, anteTwo, ppwTwo, wagerTwo;
+	TextField anteOne, ppwOne, anteTwo, ppwTwo;
 	MenuBar menuBar;
 	Menu options;
 	MenuItem freshStart, newLook, exit;
@@ -78,11 +78,9 @@ public class ThreeCardPokerGame extends Application {
 		anteOne = new TextField("0");
 		ppw1 = new Label("PPW");
 		ppwOne = new TextField("0");
-		wager1 = new Label("Wager");
+		wager1 = new Label("Wager: $" + playerOne.playBet);
 		wager1.setDisable(true);
-		wagerOne = new TextField();
-		wagerOne.setDisable(true);
-		betsOne = new VBox(10, ante1, anteOne, ppw1, ppwOne, wager1, wagerOne);
+		betsOne = new VBox(10, ante1, anteOne, ppw1, ppwOne, wager1);
 		playerOneAll = new HBox(10, betsOne, playerOneStuff);
 
 		/*----------------------Design aspects for Player2-------------------------------*/
@@ -97,11 +95,9 @@ public class ThreeCardPokerGame extends Application {
 		anteTwo = new TextField("0");
 		ppw2 = new Label("PPW");
 		ppwTwo = new TextField("0");
-		wager2 = new Label("Wager");
+		wager2 = new Label("Wager: $" + playerTwo.playBet);
 		wager2.setDisable(true);
-		wagerTwo = new TextField();
-		wagerTwo.setDisable(true);
-		betsTwo = new VBox(10, ante2, anteTwo, ppw2, ppwTwo, wager2, wagerTwo);
+		betsTwo = new VBox(10, ante2, anteTwo, ppw2, ppwTwo, wager2);
 		playerTwoAll = new HBox(10, playerTwoStuff, betsTwo);
 
 		/*----------------------Design aspects for message-------------------------------*/
@@ -154,7 +150,7 @@ public class ThreeCardPokerGame extends Application {
 			int playerAnte1 = Integer.parseInt(anteOne.getText());
 			int playerPpw1 = Integer.parseInt(ppwOne.getText());
 			int playerAnte2 = Integer.parseInt(anteTwo.getText());
-			int playerPpw2 = Integer.parseInt(ppw2.getText());
+			int playerPpw2 = Integer.parseInt(ppwTwo.getText());
 
 			pause.play();
 
