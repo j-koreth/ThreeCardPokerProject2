@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -44,7 +45,7 @@ public class ThreeCardPokerGame extends Application {
 		pane.setPadding(new Insets(70));
 		pane.setStyle("-fx-background-color: gold;" + "-fx-border-color: black;"+
 				"-fx-border-width: 10;");
-
+		System.out.println(		Font.getFamilies());
 		/*----------------------Design aspects for dealer-------------------------------*/
 		dealerLabel = new Label("Dealer");
 		dealerLabel.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: firebrick;");
