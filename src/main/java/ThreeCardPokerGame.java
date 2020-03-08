@@ -304,12 +304,13 @@ public class ThreeCardPokerGame extends Application {
 
 		/*----------------------Fold's actions-------------------------------*/
 		fold.setOnAction(e-> {
+			boolean dealerHand = queenHigh(theDealer);
 
 			playerOne.totalWinnings -= playerOne.anteBet;
 			playerOne.totalWinnings = PlayGame.returnPpw(playerOne);
 
 			int compareOne = 3;
-			int compareTwo = playerTwoChoice(playerTwo, r.nextBoolean());
+			int compareTwo = playerTwoChoice(playerTwo, r.nextBoolean(), dealerHand);
 
 			winningOne.setText("Winnings: $" + playerOne.totalWinnings);
 			winningTwo.setText("Winnings: $" + playerTwo.totalWinnings);
@@ -329,10 +330,13 @@ public class ThreeCardPokerGame extends Application {
 
 		/*----------------------Bet's actions-------------------------------*/
 		bet.setOnAction(e-> {
+			boolean dealerHand = queenHigh(theDealer);
+			//dealer's hand is true
+			//int compareOne = 4;
 
 			playerOne.totalWinnings = PlayGame.playerVDealer(theDealer, playerOne);
 			int compareOne = ThreeCardLogic.compareHands(theDealer.dealersHand, playerOne.hand);
-			int compareTwo = playerTwoChoice(playerTwo, r.nextBoolean());
+			int compareTwo = playerTwoChoice(playerTwo, r.nextBoolean(), dealerHand);
 
 			winningOne.setText("Winnings: $" + playerOne.totalWinnings);
 			winningTwo.setText("Winnings: $" + playerTwo.totalWinnings);
@@ -358,9 +362,10 @@ public class ThreeCardPokerGame extends Application {
 		vbox.getStyleClass().add("card");
 	}
 
-	public int playerTwoChoice (Player player, boolean choice) {
-		//Bet
+	public int playerTwoChoice (Player player, boolean choice, boolean dealer) {
+
 		if (choice) {
+
 			playerTwo.totalWinnings = PlayGame.playerVDealer(theDealer, playerTwo);
 			return ThreeCardLogic.compareHands(theDealer.dealersHand, playerTwo.hand);
 		}
@@ -369,6 +374,12 @@ public class ThreeCardPokerGame extends Application {
 			playerTwo.totalWinnings = PlayGame.returnPpw(playerTwo);
 			return 3;
 		}
+	}
+	public boolean queenHigh(Dealer dealer) {
+		if (dealer.dealersHand.get(2).value < 12) {
+			return false;
+		}
+		return true;
 	}
 
 }
