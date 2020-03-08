@@ -117,6 +117,7 @@ public class ThreeCardPokerGame extends Application {
 		betsTwo = new VBox(10, ante2, anteTwo, ppw2, ppwTwo, wager2);
 		playerTwoAll = new HBox(10, playerTwoStuff, betsTwo);
 
+
 		/*----------------------Design aspects for message-------------------------------*/
 		message = new Label();
 		message.setText("Place ante and/or optional pair plus wager (PPW) between $5-25. Click bet to deal cards!");
@@ -175,11 +176,12 @@ public class ThreeCardPokerGame extends Application {
 
 		exit.setOnAction(e -> {primaryStage.close();});
 
+		Random r = new Random();
+
 		/*----------------------Deal's actions-------------------------------*/
 		deal.setOnAction(e-> {
 			int playerAnte1 = Integer.parseInt(anteOne.getText());
 			int playerPpw1 = Integer.parseInt(ppwOne.getText());
-			Random r = new Random();
 			int playerAnte2 = r.nextInt((25 - 5) + 1) + 5;
 			anteTwo.setText("" + playerAnte2);
 			int playerPpw2 = r.nextInt((25 - 5) + 1) + 5;
@@ -226,8 +228,8 @@ public class ThreeCardPokerGame extends Application {
 			playerOne.totalWinnings -= playerOne.anteBet;
 			playerOne.totalWinnings = returnPpw(playerOne);
 
-			playerTwo.totalWinnings -= playerTwo.anteBet;
-			playerTwo.totalWinnings = returnPpw(playerTwo);
+			int compareOne = 3;
+			int compareTwo = playerTwoChoice(playerTwo, r.nextBoolean());
 
 			winningOne.setText("Winnings: $" + playerOne.totalWinnings);
 			winningTwo.setText("Winnings: $" + playerTwo.totalWinnings);
@@ -236,7 +238,9 @@ public class ThreeCardPokerGame extends Application {
 			bet.setDisable(true);
 			anteOne.setDisable(false);
 			ppwOne.setDisable(false);
-			Label foldMessage = new Label("Both players folded. Dealer won! Make a new ante and/or PPW and click Deal to play again!");
+			Label foldMessage = new Label();
+			String setMessage = messageString(compareOne, compareTwo);
+			foldMessage.setText(setMessage);
 			pane.setBottom(foldMessage);
 		});
 
@@ -244,9 +248,8 @@ public class ThreeCardPokerGame extends Application {
 		bet.setOnAction(e-> {
 
 			playerOne.totalWinnings = playerVDealer(theDealer, playerOne);
-			playerTwo.totalWinnings = playerVDealer(theDealer, playerTwo);
 			int compareOne = ThreeCardLogic.compareHands(theDealer.dealersHand, playerOne.hand);
-			int compareTwo = ThreeCardLogic.compareHands(theDealer.dealersHand, playerTwo.hand);
+			int compareTwo = playerTwoChoice(playerTwo, r.nextBoolean());
 
 			winningOne.setText("Winnings: $" + playerOne.totalWinnings);
 			winningTwo.setText("Winnings: $" + playerTwo.totalWinnings);
@@ -256,37 +259,25 @@ public class ThreeCardPokerGame extends Application {
 			anteOne.setDisable(false);
 			ppwOne.setDisable(false);
 			Label betMessage = new Label();
-			if (compareOne == 1 && compareTwo == 1) {
-				betMessage.setText("Both players lost! Dealer won! Make a new ante and/or PPW and click Deal to play again!");
-			}
-			else if (compareOne == 1 && compareTwo == 2) {
-				betMessage.setText("Player one lost! Player two Won! Make a new ante and/or PPW and click Deal to play again!");
-			}
-			else if (compareOne == 1 && compareTwo == 0) {
-				betMessage.setText("Player one lost! Player two and Dealer tied! Make a new ante and/or PPW and click Deal to play again!");
-			}
-			else if (compareOne == 2 && compareTwo == 2) {
-				betMessage.setText("Both players won! Dealer lost! Make a new ante and/or PPW and click Deal to play again!");
-			}
-			else if (compareOne == 2 && compareTwo == 1) {
-				betMessage.setText("Player one won! Player two lost! Make a new ante and/or PPW and click Deal to play again!");
-			}
-			else if (compareOne == 2 && compareTwo == 0) {
-				betMessage.setText("Player one won! Player two and Dealer tied! Make a new ante and/or PPW and click Deal to play again!");
-			}
-			else if (compareOne == 0 && compareTwo == 0) {
-				betMessage.setText("Everyone tied! Make a new ante and/or PPW and click Deal to play again!");
-			}
-			else if (compareOne == 0 && compareTwo == 1) {
-				betMessage.setText("Player one and Dealer tied! PLayer two lost! Make a new ante and/or PPW and click Deal to play again!");
-			}
-			else if (compareOne == 0 && compareTwo == 2) {
-				betMessage.setText("Player one and Dealer tied! Player two won! Make a new ante and/or PPW and click Deal to play again!");
-			}
+			String setMessage = messageString(compareOne, compareTwo);
+			betMessage.setText(setMessage);
 			pane.setBottom(betMessage);
 
 		});
 
+	}
+
+	public int playerTwoChoice (Player player, boolean choice) {
+		//Bet
+		if (choice) {
+			playerTwo.totalWinnings = playerVDealer(theDealer, playerTwo);
+			return ThreeCardLogic.compareHands(theDealer.dealersHand, playerTwo.hand);
+		}
+		else {
+			playerTwo.totalWinnings -= playerTwo.anteBet;
+			playerTwo.totalWinnings = returnPpw(playerTwo);
+			return 3;
+		}
 	}
 
 	//Returns what the player won or lost from the pair plus wager
@@ -314,5 +305,56 @@ public class ThreeCardPokerGame extends Application {
 			player.totalWinnings = returnPpw(player);
 		}
 		return player.totalWinnings;
+	}
+
+	public String messageString (int compareOne, int compareTwo) {
+		if (compareOne == 1 && compareTwo == 1) {
+			return "Both players lost! Dealer won! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else if (compareOne == 1 && compareTwo == 2) {
+			return "Player one lost! Player two Won! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else if (compareOne == 1 && compareTwo == 3) {
+			return "Player one lost! Player two folded! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else if (compareOne == 1 && compareTwo == 0) {
+			return "Player one lost! Player two and Dealer tied! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else if (compareOne == 2 && compareTwo == 2) {
+			return "Both players won! Dealer lost! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else if (compareOne == 2 && compareTwo == 1) {
+			return "Player one won! Player two lost! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else if (compareOne == 2 && compareTwo == 0) {
+			return "Player one won! Player two and Dealer tied! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else if (compareOne == 2 && compareTwo == 3) {
+			return "Player one won! Player two folded! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else if (compareOne == 0 && compareTwo == 0) {
+			return "Everyone tied! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else if (compareOne == 0 && compareTwo == 1) {
+			return "Player one and Dealer tied! PLayer two lost! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else if (compareOne == 0 && compareTwo == 2) {
+			return "Player one and Dealer tied! Player two won! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else if (compareOne == 0 && compareTwo == 3) {
+			return "Player one and Dealer tied! Player two folded! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else if (compareOne == 3 && compareTwo == 3) {
+			return "Both players folded! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else if (compareOne == 3 && compareTwo == 0) {
+			return "Player one folded! Player two and Dealer tied! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else if (compareOne == 3 && compareTwo == 1) {
+			return "Player one folded! Player two lost! Make a new ante and/or PPW and click Deal to play again!";
+		}
+		else {
+			return "Player one folded! Player two won! Make a new ante and/or PPW and click Deal to play again!";
+		}
 	}
 }
