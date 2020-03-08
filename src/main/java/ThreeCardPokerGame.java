@@ -72,7 +72,11 @@ public class ThreeCardPokerGame extends Application {
 		winningOne.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: orangered;");
 		playerLabelOne = new Label("Player 1");
 		playerLabelOne.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: orangered;");
-		Label playerOneTemp = new Label("Image will go here");
+//		Label playerOneTemp = new Label("Image will go here");
+		ImageView playerOneTemp = new ImageView("/player_avatars/bruce-lee.jpg");
+		playerOneTemp.setFitHeight(175);
+		playerOneTemp.setFitWidth(150);
+
 		playerOneStuff = new VBox(30, playerLabelOne, playerOneTemp, winningOne);
 		ante1 = new Label("Ante");
 		anteOne = new TextField("0");
@@ -154,14 +158,13 @@ public class ThreeCardPokerGame extends Application {
 			int playerAnte1 = Integer.parseInt(anteOne.getText());
 			int playerPpw1 = Integer.parseInt(ppwOne.getText());
 			int playerAnte2 = Integer.parseInt(anteTwo.getText());
-			int playerPpw2 = Integer.parseInt(ppw2.getText());
+			int playerPpw2 = Integer.parseInt(ppwTwo.getText());
 
 			pause.play();
 
-			if (((playerAnte1 < 5 || playerAnte1 > 25) && (playerAnte1 != 0)) ||
-					((playerAnte2 < 5 || playerAnte2 > 25) && (playerAnte2 != 0))) {
-				Label anteMessage = new Label("Please place a bet between $5-25.");
-				pane.setBottom(anteMessage);
+			if ((playerAnte1 < 5 || playerAnte1 > 25) || ((playerAnte2 < 5 || playerAnte2 > 25) )) {
+				message.setText("Please place a bet between $5-25.");
+				message.setAlignment(Pos.CENTER);
 			}
 		});
 
