@@ -161,6 +161,7 @@ public class ThreeCardPokerGame extends Application {
 			if (!newLookInUse) {
 				scene.getStylesheets().remove("css/main.css");
 				scene.getStylesheets().add("css/alternative.css");
+				Image pic = new Image("player_avatars/han-enter-the-dragon (2).jpg");
 			}
 			else{
 				scene.getStylesheets().remove("css/alternative.css");
