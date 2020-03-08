@@ -12,6 +12,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.util.Random;
+
 
 public class ThreeCardPokerGame extends Application {
 	Player playerOne;
@@ -46,7 +48,7 @@ public class ThreeCardPokerGame extends Application {
 		/*----------------------Design aspects for dealer-------------------------------*/
 		dealerLabel = new Label("Dealer");
 		dealerLabel.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: orangered;");
-		Image pic = new Image("file:src/main/java/resources/player_avatars/han-enter-the-dragon (2).jpg");
+		Image pic = new Image("file:src/main/java/resources/han-enter-the-dragon (2).jpg");
 		ImageView dealerPic = new ImageView(pic);
 		dealerPic.setFitHeight(100);
 		dealerPic.setFitWidth(100);
@@ -79,7 +81,6 @@ public class ThreeCardPokerGame extends Application {
 		ppw1 = new Label("PPW");
 		ppwOne = new TextField("0");
 		wager1 = new Label("Wager: $" + playerOne.playBet);
-		wager1.setDisable(true);
 		betsOne = new VBox(10, ante1, anteOne, ppw1, ppwOne, wager1);
 		playerOneAll = new HBox(10, betsOne, playerOneStuff);
 
@@ -93,10 +94,11 @@ public class ThreeCardPokerGame extends Application {
 		playerTwoStuff = new VBox(30, playerLabelTwo, playerTwoTemp, winningTwo);
 		ante2 = new Label("Ante");
 		anteTwo = new TextField("0");
+		anteTwo.setDisable(true);
 		ppw2 = new Label("PPW");
 		ppwTwo = new TextField("0");
+		ppwTwo.setDisable(true);
 		wager2 = new Label("Wager: $" + playerTwo.playBet);
-		wager2.setDisable(true);
 		betsTwo = new VBox(10, ante2, anteTwo, ppw2, ppwTwo, wager2);
 		playerTwoAll = new HBox(10, playerTwoStuff, betsTwo);
 
@@ -149,51 +151,37 @@ public class ThreeCardPokerGame extends Application {
 		deal.setOnAction(e-> {
 			int playerAnte1 = Integer.parseInt(anteOne.getText());
 			int playerPpw1 = Integer.parseInt(ppwOne.getText());
-			int playerAnte2 = Integer.parseInt(anteTwo.getText());
-			int playerPpw2 = Integer.parseInt(ppwTwo.getText());
-
+			Random r = new Random();
+			int playerAnte2 = r.nextInt((25 - 5) + 1) + 5;
+			anteTwo.setText("" + playerAnte2);
+			int playerPpw2 = r.nextInt((25 - 5) + 1) + 5;
+			ppwTwo.setText("" + playerPpw2);
 			pause.play();
 
-			if (((playerAnte1 < 5 || playerAnte1 > 25) && (playerAnte1 != 0)) ||
-					((playerAnte2 < 5 || playerAnte2 > 25) && (playerAnte2 != 0))) {
+			if ((playerAnte1 < 5 || playerAnte1 > 25) || (playerAnte2 < 5 || playerAnte2 > 25)) {
 				Label anteMessage = new Label("Please place a bet between $5-25.");
 				pane.setBottom(anteMessage);
 			}
+			else {
+					if (playerPpw1 >= 5 && playerPpw1 <= 25) {
+						playerOne.pairPlusBet = playerPpw1;
+					}
+					playerTwo.pairPlusBet = playerPpw2;
+					ppwOne.setDisable(true);
+
+					playerOne.anteBet = playerAnte1;
+					playerTwo.anteBet = playerAnte2;
+					anteOne.setDisable(true);
+
+					playerOne.playBet = playerAnte1;
+					playerTwo.playBet = playerAnte2;
+					wager1.setText("Wager: $" + playerOne.playBet);
+					wager2.setText("Wager: $" + playerTwo.playBet);
+
+
+				}
 		});
 
-//		deal.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle(ActionEvent event) {
-//				int playerAnte1 = Integer.parseInt(anteOne.getText());
-//				int playerPpw1 = Integer.parseInt(ppwOne.getText());
-//				int playerAnte2 = Integer.parseInt(anteTwo.getText());
-//				int playerPpw2 = Integer.parseInt(ppw2.getText());
-//
-//				if ((playerAnte1 < 5 || playerAnte1 > 25) || (playerAnte2 < 5 || playerAnte2 > 25)) {
-//					message.setText("Please enter an ante between $5-25.");
-//				}
-//				else {
-//					if (playerPpw1 >= 5 && playerPpw1 <= 25) {
-//						playerOne.pairPlusBet = playerPpw1;
-//					}
-//					if (playerPpw2 >= 5 && playerPpw2 <= 25) {
-//						playerTwo.pairPlusBet = playerPpw2;
-//					}
-//					ppw1.setDisable(true);
-//					ppwOne.setDisable(true);
-//					ppw2.setDisable(true);
-//					ppwTwo.setDisable(true);
-//
-//					playerOne.anteBet = playerAnte1;
-//					playerTwo.anteBet = playerAnte2;
-//					ante1.setDisable(true);
-//					anteOne.setDisable(true);
-//					ante2.setDisable(true);
-//					anteTwo.setDisable(true);
-//					pause.setOnFinished(e->primaryStage.setScene(scene));
-//				}
-//			}
-//		});
 
 	}
 
