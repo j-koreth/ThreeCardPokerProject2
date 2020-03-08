@@ -1,0 +1,23 @@
+.avatar{
+    -fx-background-color: DARKORANGE;
+}
+
+.headerLabels{
+    -fx-text-fill: white;
+    -fx-background-color: DARKORANGE;
+}
+
+.menu-bar{
+    -fx-background-color: DARKORANGE;
+    -fx-text-fill: white;
+}
+
+Button {
+    -fx-background-color: DARKORANGE;
+    -fx-text-fill: white;
+}
+
+BorderPane {
+    -fx-background-color: DARKOLIVEGREEN;
+    -fx-border-color: DARKMAGENTA;
+}

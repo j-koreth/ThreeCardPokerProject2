@@ -1,0 +1,33 @@
+.root{
+    -fx-font-family: 'Palatino';
+}
+
+.avatar{
+    -fx-padding: 10;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.headerLabels{
+    -fx-font-size: 15;
+    -fx-padding: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 0);
+}
+
+.menu-bar{
+    -fx-padding: 2;
+    -fx-background-radius: 2.5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 0);
+}
+
+Button {
+    -fx-padding: 10;
+    -fx-font-size: 25;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+BorderPane {
+    -fx-border-width: 10;
+}

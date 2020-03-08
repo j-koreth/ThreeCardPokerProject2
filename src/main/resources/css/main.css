@@ -1,44 +1,23 @@
-.root{
-    -fx-font-family: 'Palatino';
-}
-
 .avatar{
-    -fx-padding: 10;
     -fx-background-color: firebrick;
-    -fx-background-radius: 5;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
 
 .headerLabels{
-    -fx-font-size: 15;
     -fx-text-fill: white;
     -fx-background-color: firebrick;
-    -fx-padding: 5;
-    -fx-background-radius: 5;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 0);
 }
 
 .menu-bar{
     -fx-background-color: firebrick;
-    -fx-padding: 2;
     -fx-text-fill: white;
-    -fx-background-radius: 2.5;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 0);
 }
 
 Button {
     -fx-background-color: firebrick;
-    -fx-padding: 10;
     -fx-text-fill: white;
-        -fx-font-size: 25;
-
-    -fx-background-radius: 5;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
 
 BorderPane {
     -fx-background-color: gold;
     -fx-border-color: black;
-    -fx-text-fill: white;
-    -fx-border-width: 10;
 }

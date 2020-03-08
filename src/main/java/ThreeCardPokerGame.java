@@ -29,6 +29,7 @@ public class ThreeCardPokerGame extends Application {
 	MenuItem freshStart, newLook, exit;
 	Label dealerLabel, playerLabelOne, playerLabelTwo, ante1, ppw1, wager1, ante2, ppw2, wager2, winningOne, winningTwo, message;
 	PauseTransition pause = new PauseTransition(Duration.seconds(2.0));
+	boolean newLookInUse = false;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -144,6 +145,8 @@ public class ThreeCardPokerGame extends Application {
 		pane.setBottom(message);
 		Scene scene = new Scene(pane, 1050,700);
 		scene.getStylesheets().add("css/main.css");
+		scene.getStylesheets().add("css/default.css");
+
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
@@ -155,17 +158,17 @@ public class ThreeCardPokerGame extends Application {
 			winningTwo.setText("Winnings: $" + playerTwo.totalWinnings);
 		});
 
-		newLook.setOnAction(e->{pane.setStyle("-fx-background-color: DARKOLIVEGREEN;" + "-fx-border-color: DARKMAGENTA;"+
-				"-fx-border-width: 10;");
-				dealerLabel.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: DARKORANGE");
-				playerLabelOne.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" +"-fx-border-color: DARKORANGE");
-				winningOne.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: DARKORANGE;");
-				playerLabelTwo.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" +"-fx-border-color: DARKORANGE");
-				winningTwo.setStyle("-fx-font-size: 20;" + "-fx-border-size: 40;" + "-fx-border-color: DARKORANGE;");
-				deal.setStyle("-fx-background-color: DARKORANGE");
-				bet.setStyle("-fx-background-color: DARKORANGE");
-				fold.setStyle("-fx-background-color: DARKORANGE");
-				menuBar.setStyle("-fx-background-color: DARKORANGE");
+		newLook.setOnAction(e->{
+			if (!newLookInUse) {
+				scene.getStylesheets().remove("css/main.css");
+				scene.getStylesheets().add("css/alternative.css");
+			}
+			else{
+				scene.getStylesheets().remove("css/alternative.css");
+				scene.getStylesheets().add("css/main.css");
+			}
+
+			newLookInUse = !newLookInUse;
 		});
 
 		exit.setOnAction(e -> {primaryStage.close();});
