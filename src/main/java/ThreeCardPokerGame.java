@@ -9,7 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -239,27 +238,46 @@ public class ThreeCardPokerGame extends Application {
 
 		/*----------------------Bet's actions-------------------------------*/
 		bet.setOnAction(e-> {
-			if (ThreeCardLogic.compareHands(theDealer.dealersHand, playerOne.hand) == 1) {
-				playerOne.totalWinnings -= (playerOne.anteBet * 2);
-				playerOne.totalWinnings = returnPpw(playerOne);
-			}
-			else if (ThreeCardLogic.compareHands(theDealer.dealersHand, playerOne.hand) == 2) {
-				playerOne.totalWinnings += (playerOne.anteBet * 4);
-				playerOne.totalWinnings = returnPpw(playerOne);
-			}
-			else {
-				playerOne.totalWinnings = returnPpw(playerOne);
-			}
+
+			playerOne.totalWinnings = playerVDealer(theDealer, playerOne);
+			playerTwo.totalWinnings = playerVDealer(theDealer, playerTwo);
+
+			winningOne.setText("Winnings: $" + playerOne.totalWinnings);
+			winningTwo.setText("Winnings: $" + playerTwo.totalWinnings);
+			deal.setDisable(false);
+			fold.setDisable(true);
+			bet.setDisable(true);
+			anteOne.setDisable(false);
+			ppwOne.setDisable(false);
+			pane.setBottom(message);
+
 		});
 
 	}
 
+	//Returns what the player won or lost from the pair plus wager
 	public int returnPpw (Player player) {
 		if (ThreeCardLogic.evalHand(player.hand) == 0) {
 			player.totalWinnings -= player.pairPlusBet;
 		}
 		else {
 			player.totalWinnings += ThreeCardLogic.evalPPWinnings(player.hand, player.pairPlusBet);
+		}
+		return player.totalWinnings;
+	}
+
+	//Returns what the player won or lost from the wager bet
+	public int playerVDealer (Dealer dealer, Player player) {
+		if (ThreeCardLogic.compareHands(dealer.dealersHand, player.hand) == 1) {
+			player.totalWinnings -= (player.anteBet * 2);
+			player.totalWinnings = returnPpw(player);
+		}
+		else if (ThreeCardLogic.compareHands(dealer.dealersHand, player.hand) == 2) {
+			player.totalWinnings += (player.anteBet * 4);
+			player.totalWinnings = returnPpw(player);
+		}
+		else {
+			player.totalWinnings = returnPpw(player);
 		}
 		return player.totalWinnings;
 	}
