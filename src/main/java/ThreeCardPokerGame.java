@@ -13,6 +13,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -141,13 +143,14 @@ public class ThreeCardPokerGame extends Application {
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
+
 		try{
-			Media dbz = new Media("music/dbz1.mp3");
+			Media dbz = new Media(getClass().getResource("music/sleeping.mp3").toURI().toString());
 			MediaPlayer player = new MediaPlayer(dbz);
 			player.play();
 		}
 		catch(IllegalArgumentException e){
-			System.out.println(getClass().getResource("music/dbz1.mp3"));
+			System.out.println(getClass().getResource("music/sleeping.mp3"));
 		}
 
 		/*----------------------Menu item's actions-------------------------------*/
@@ -189,6 +192,15 @@ public class ThreeCardPokerGame extends Application {
 
 				playerOneCharacter.changeTheme("player_avatars/goku.jpeg", "JPEG/Green_back.jpg");
 				playerTwoCharacter.changeTheme("player_avatars/vegeta.jpeg", "JPEG/Green_back.jpg");
+
+				try{
+					Media dbz = new Media(getClass().getResource("music/dbz1.mp3").toURI().toString());
+					MediaPlayer player = new MediaPlayer(dbz);
+					player.play();
+				}
+				catch(URISyntaxException exception){
+					System.out.println(getClass().getResource("music/dbz1.mp3"));
+				}
 			}
 			else{
 				scene.getStylesheets().remove("css/alternative.css");
@@ -196,6 +208,15 @@ public class ThreeCardPokerGame extends Application {
 				dealer.changeTheme("player_avatars/han-enter-the-dragon (2).jpg", "JPEG/Yellow_back.jpg");
 				playerOneCharacter.changeTheme("player_avatars/bruce-lee.jpg", "JPEG/Yellow_back.jpg");
 				playerTwoCharacter.changeTheme("player_avatars/jim-kelly-enter-the-dragon (2).jpg", "JPEG/Yellow_back.jpg");
+
+				try{
+					Media dbz = new Media(getClass().getResource("music/sleeping.mp3").toURI().toString());
+					MediaPlayer player = new MediaPlayer(dbz);
+					player.play();
+				}
+				catch(URISyntaxException exception){
+					System.out.println(getClass().getResource("music/sleeping.mp3"));
+				}
 			}
 			newLookInUse = !newLookInUse;
 		});
