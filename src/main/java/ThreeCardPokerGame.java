@@ -26,6 +26,8 @@ public class ThreeCardPokerGame extends Application {
 	Dealer theDealer;
 	Character dealer, playerOneCharacter, playerTwoCharacter;
 
+	MediaPlayer player;
+
 	VBox playerOneStuff, playerTwoStuff, betsOne, betsTwo, buttonStuff;
 	HBox dealerContainer;
 	HBox playerOneAll, playerTwoAll;
@@ -146,7 +148,7 @@ public class ThreeCardPokerGame extends Application {
 
 		try{
 			Media dbz = new Media(getClass().getResource("music/sleeping.mp3").toURI().toString());
-			MediaPlayer player = new MediaPlayer(dbz);
+			player = new MediaPlayer(dbz);
 			player.play();
 		}
 		catch(IllegalArgumentException e){
@@ -194,8 +196,9 @@ public class ThreeCardPokerGame extends Application {
 				playerTwoCharacter.changeTheme("player_avatars/vegeta.jpeg", "JPEG/Green_back.jpg");
 
 				try{
+					player.pause();
 					Media dbz = new Media(getClass().getResource("music/dbz1.mp3").toURI().toString());
-					MediaPlayer player = new MediaPlayer(dbz);
+					player = new MediaPlayer(dbz);
 					player.play();
 				}
 				catch(URISyntaxException exception){
@@ -210,8 +213,9 @@ public class ThreeCardPokerGame extends Application {
 				playerTwoCharacter.changeTheme("player_avatars/jim-kelly-enter-the-dragon (2).jpg", "JPEG/Yellow_back.jpg");
 
 				try{
+					player.pause();
 					Media dbz = new Media(getClass().getResource("music/sleeping.mp3").toURI().toString());
-					MediaPlayer player = new MediaPlayer(dbz);
+					player = new MediaPlayer(dbz);
 					player.play();
 				}
 				catch(URISyntaxException exception){
