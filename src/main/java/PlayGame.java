@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class PlayGame {
 
     /*Returns what the player won or lost from the pair plus wager*/
@@ -38,6 +41,17 @@ public class PlayGame {
 
         return player.totalWinnings;
     }//end of playerVDealer
+
+    /*Checks to see if the dealer has a queen high or not*/
+    public static boolean queenHigh(Dealer qH) {
+
+        ArrayList<Card> queenH = qH.dealersHand;
+        Collections.sort(queenH);
+        if (queenH.get(2).value < 12) {
+            return false;
+        }
+        return true;
+    }
 
     /*Prints out the different messages for the game*/
     public static String messageString(int compareOne, int compareTwo) {

@@ -181,8 +181,6 @@ public class ThreeCardPokerGame extends Application {
 		});
 
 		newLook.setOnAction(e->{
-			pause.play();
-
 			if (!newLookInUse) {
 				scene.getStylesheets().remove("css/main.css");
 				scene.getStylesheets().add("css/alternative.css");
@@ -270,8 +268,6 @@ public class ThreeCardPokerGame extends Application {
 		/*----------------------Fold's actions-------------------------------*/
 		fold.setOnAction(e-> {
 			theDealer.dealersHand = theDealer.dealHand();
-			pause.play();
-
 			boolean dealerHand = queenHigh(theDealer);
 
 			playerOne.totalWinnings -= playerOne.anteBet;
@@ -311,8 +307,6 @@ public class ThreeCardPokerGame extends Application {
 
 		/*----------------------Bet's actions-------------------------------*/
 		bet.setOnAction(e-> {
-			pause.play();
-
 			theDealer.dealersHand = theDealer.dealHand();
 			boolean dealerHand = queenHigh(theDealer);
 
@@ -363,7 +357,14 @@ public class ThreeCardPokerGame extends Application {
 
 	}
 
-	public int playerTwoChoice (Player player, boolean choice, boolean dealer) {
+	void setUpCards(VBox vbox, ImageView card){
+		card.setFitHeight(100);
+		card.setFitWidth(65);
+		vbox.getChildren().add(card);
+		vbox.getStyleClass().add("card");
+	}
+
+	public int playerTwoChoice (Player player, boolean choice, boolean qH) {
 
 		if (choice) {
 			if (!qH) {
