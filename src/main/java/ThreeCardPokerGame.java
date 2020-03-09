@@ -119,7 +119,7 @@ public class ThreeCardPokerGame extends Application {
 		/*----------------------Design aspects for message-------------------------------*/
 		message = new Label();
 		message.setText("Place ante and/or optional pair plus wager (PPW) between $5-25. Click bet to deal cards!");
-		message.setStyle("-fx-font-size: 16;" );
+		message.getStyleClass().add("message");
 		message.setAlignment(Pos.CENTER);
 
 		/*----------------------Design aspects for menu-------------------------------*/
@@ -142,14 +142,15 @@ public class ThreeCardPokerGame extends Application {
 		Scene scene = new Scene(pane, 1150,700);
 		scene.getStylesheets().add("css/main.css");
 		scene.getStylesheets().add("css/default.css");
-
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
+		//Default music to play
 		try{
 			Media dbz = new Media(getClass().getResource("music/sleeping.mp3").toURI().toString());
 			player = new MediaPlayer(dbz);
 			player.play();
+			player.setAutoPlay(true);
 		}
 		catch(IllegalArgumentException e){
 			System.out.println(getClass().getResource("music/sleeping.mp3"));
@@ -187,6 +188,7 @@ public class ThreeCardPokerGame extends Application {
 
 		newLook.setOnAction(e->{
 			if (!newLookInUse) {
+				//Dragon Ball Z Theme
 				scene.getStylesheets().remove("css/main.css");
 				scene.getStylesheets().add("css/alternative.css");
 
@@ -199,6 +201,7 @@ public class ThreeCardPokerGame extends Application {
 					player.pause();
 					Media dbz = new Media(getClass().getResource("music/dbz1.mp3").toURI().toString());
 					player = new MediaPlayer(dbz);
+					player.setAutoPlay(true);
 					player.play();
 				}
 				catch(URISyntaxException exception){
@@ -216,6 +219,7 @@ public class ThreeCardPokerGame extends Application {
 					player.pause();
 					Media dbz = new Media(getClass().getResource("music/sleeping.mp3").toURI().toString());
 					player = new MediaPlayer(dbz);
+					player.setAutoPlay(true);
 					player.play();
 				}
 				catch(URISyntaxException exception){
