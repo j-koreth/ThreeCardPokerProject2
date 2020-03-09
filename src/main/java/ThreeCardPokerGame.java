@@ -14,6 +14,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.nio.file.Paths;
 import java.util.Random;
 
 public class ThreeCardPokerGame extends Application {
@@ -140,14 +141,14 @@ public class ThreeCardPokerGame extends Application {
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		try{
-			Media dbz = new Media("music/dbz1.mp3");
-			MediaPlayer player = new MediaPlayer(dbz);
-			player.play();
-		}
-		catch(IllegalArgumentException e){
-			System.out.println(this.getClass().getResource("music/dbz1.mp3"));
-		}
+//		try{
+//			Media dbz = new Media(Paths.get("music/dbz1.mp3").toUri().toString());
+//			MediaPlayer player = new MediaPlayer(dbz);
+//			player.play();
+//		}
+//		catch(IllegalArgumentException e){
+//			System.out.println(this.getClass().getResource("music/dbz1.mp3"));
+//		}
 
 		/*----------------------Menu item's actions-------------------------------*/
 		freshStart.setOnAction(e -> {
