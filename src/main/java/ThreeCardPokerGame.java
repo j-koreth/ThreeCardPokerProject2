@@ -8,8 +8,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+//import javafx.scene.media.*;
+//import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -23,7 +23,7 @@ public class ThreeCardPokerGame extends Application {
 	Dealer theDealer;
 	Character dealer, playerOneCharacter, playerTwoCharacter;
 
-	MediaPlayer player;
+//	MediaPlayer player;
 
 	VBox playerOneStuff, playerTwoStuff, betsOne, betsTwo, buttonStuff;
 	HBox dealerContainer;
@@ -142,17 +142,17 @@ public class ThreeCardPokerGame extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
-		//Default music to play
-		try{
-			Media dbz = new Media(getClass().getResource("music/sleeping.mp3").toURI().toString());
-			player = new MediaPlayer(dbz);
-			player.play();
-			player.setAutoPlay(true);
-		}
-		//end of try
-		catch(IllegalArgumentException e){
-			System.out.println(getClass().getResource("music/sleeping.mp3"));
-		}//end of catch
+//		//Default music to play
+//		try{
+//			Media dbz = new Media(getClass().getResource("music/sleeping.wav").toURI().toString());
+//			player = new MediaPlayer(dbz);
+//			player.play();
+//			player.setAutoPlay(true);
+//		}
+//		//end of try
+//		catch(IllegalArgumentException e){
+//			System.out.println(getClass().getResource("music/sleeping.wav"));
+//		}//end of catch
 
 		/*----------------------Menu item's actions-------------------------------*/
 		/*Resets all the items on the screen to their original values*/
@@ -197,17 +197,17 @@ public class ThreeCardPokerGame extends Application {
 
 				playerOneCharacter.changeTheme("player_avatars/goku.jpeg", "JPEG/Green_back.jpg");
 				playerTwoCharacter.changeTheme("player_avatars/vegeta.jpeg", "JPEG/Green_back.jpg");
-				/*Changes music*/
-				try{
-					player.pause();
-					Media dbz = new Media(getClass().getResource("music/dbz1.mp3").toURI().toString());
-					player = new MediaPlayer(dbz);
-					player.setAutoPlay(true);
-					player.play();
-				}//end of try
-				catch(URISyntaxException exception){
-					System.out.println(getClass().getResource("music/dbz1.mp3"));
-				}//end of catch
+//				/*Changes music*/
+//				try{
+//					player.pause();
+//					Media dbz = new Media(getClass().getResource("music/dbz1.wav").toURI().toString());
+//					player = new MediaPlayer(dbz);
+//					player.setAutoPlay(true);
+//					player.play();
+//				}//end of try
+//				catch(URISyntaxException exception){
+//					System.out.println(getClass().getResource("music/dbz1.wav"));
+//				}//end of catch
 			}//end of if
 			/*Change to Enter the Dragon*/
 			else{
@@ -216,17 +216,17 @@ public class ThreeCardPokerGame extends Application {
 				dealer.changeTheme("player_avatars/han-enter-the-dragon (2).jpg", "JPEG/Yellow_back.jpg");
 				playerOneCharacter.changeTheme("player_avatars/bruce-lee.jpg", "JPEG/Yellow_back.jpg");
 				playerTwoCharacter.changeTheme("player_avatars/jim-kelly-enter-the-dragon (2).jpg", "JPEG/Yellow_back.jpg");
-				/*Changes music*/
-				try{
-					player.pause();
-					Media dbz = new Media(getClass().getResource("music/sleeping.mp3").toURI().toString());
-					player = new MediaPlayer(dbz);
-					player.setAutoPlay(true);
-					player.play();
-				}//end of try
-				catch(URISyntaxException exception){
-					System.out.println(getClass().getResource("music/sleeping.mp3"));
-				}//end of catch
+//				/*Changes music*/
+//				try{
+//					player.pause();
+//					Media dbz = new Media(getClass().getResource("music/sleeping.wav").toURI().toString());
+//					player = new MediaPlayer(dbz);
+//					player.setAutoPlay(true);
+//					player.play();
+//				}//end of try
+//				catch(URISyntaxException exception){
+//					System.out.println(getClass().getResource("music/sleeping.wav"));
+//				}//end of catch
 			}
 			newLookInUse = !newLookInUse;
 		}); //end of newLook
