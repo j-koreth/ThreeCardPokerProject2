@@ -44,14 +44,17 @@ public class PlayGame {
 
     /*Checks to see if the dealer has a queen high or not*/
     public static boolean queenHigh(Dealer qH) {
-
+        /*Sort the Dealer's hand*/
         ArrayList<Card> queenH = qH.dealersHand;
         Collections.sort(queenH);
+        /*No queen high*/
         if (queenH.get(2).value < 12) {
             return false;
-        }
+        }//end of if
+
+        /*has queen high*/
         return true;
-    }
+    }//end of queenHigh
 
     /*Prints out the different messages for the game*/
     public static String messageString(int compareOne, int compareTwo) {
