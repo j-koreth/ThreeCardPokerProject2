@@ -9,6 +9,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -43,6 +45,7 @@ public class ThreeCardPokerGame extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		primaryStage.setTitle("Let's Play Three Card Poker!!!");
+
 
 		BorderPane pane = new BorderPane();
 		pane.setPadding(new Insets(70));
@@ -137,6 +140,14 @@ public class ThreeCardPokerGame extends Application {
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		try{
+			Media dbz = new Media("music/dbz1.mp3");
+			MediaPlayer player = new MediaPlayer(dbz);
+			player.play();
+		}
+		catch(IllegalArgumentException e){
+			System.out.println(this.getClass().getResource("music/dbz1.mp3"));
+		}
 
 		/*----------------------Menu item's actions-------------------------------*/
 		freshStart.setOnAction(e -> {
@@ -204,10 +215,13 @@ public class ThreeCardPokerGame extends Application {
 
 			if ((playerAnte1 < 5 || playerAnte1 > 25) || ((playerPpw1 < 5 || playerPpw1 >25) && (playerPpw1 != 0 ))) {
 				Label anteMessage = new Label("Please place a bet and/or optional PPW between $5-25.");
+				anteOne.getStyleClass().add("alert");
 				pane.setBottom(anteMessage);
 			}
 			else {
-					if (playerPpw1 >= 5 && playerPpw1 <= 25) {
+				anteOne.getStyleClass().remove("alert");
+
+				if (playerPpw1 >= 5 && playerPpw1 <= 25) {
 						playerOne.pairPlusBet = playerPpw1;
 					}
 					playerTwo.pairPlusBet = playerPpw2;

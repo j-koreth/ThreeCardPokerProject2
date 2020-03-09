@@ -37,3 +37,8 @@ Button {
 BorderPane {
     -fx-border-width: 10;
 }
+
+.alert {
+      -fx-text-box-border: red ;
+      -fx-focus-color: red ;
+}
