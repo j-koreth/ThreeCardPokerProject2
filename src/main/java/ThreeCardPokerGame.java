@@ -4,17 +4,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class ThreeCardPokerGame extends Application {
@@ -206,13 +204,20 @@ public class ThreeCardPokerGame extends Application {
 
 		/*----------------------Deal's actions-------------------------------*/
 		deal.setOnAction(e-> {
-			int playerAnte1 = Integer.parseInt(anteOne.getText());
-			int playerPpw1 = Integer.parseInt(ppwOne.getText());
-			int playerAnte2 = r.nextInt((25 - 5) + 1) + 5;
-			anteTwo.setText("" + playerAnte2);
-			int playerPpw2 = r.nextInt((25 - 5) + 1) + 5;
-			ppwTwo.setText("" + playerPpw2);
-			pause.play();
+			int playerAnte1 = playerOne.anteBet;
+			int playerPpw1 = playerOne.pairPlusBet;
+			int playerAnte2 = playerTwo.anteBet;
+			int playerPpw2 = playerTwo.pairPlusBet;
+
+			if (playerOne.anteBet == 0 && playerTwo.anteBet == 0) {
+				playerAnte1 = Integer.parseInt(anteOne.getText());
+				playerPpw1 = Integer.parseInt(ppwOne.getText());
+				playerAnte2 = r.nextInt((25 - 5) + 1) + 5;
+				anteTwo.setText("" + playerAnte2);
+				playerPpw2 = r.nextInt((25 - 5) + 1) + 5;
+				ppwTwo.setText("" + playerPpw2);
+				pause.play();
+			}
 
 			if ((playerAnte1 < 5 || playerAnte1 > 25) || ((playerPpw1 < 5 || playerPpw1 >25) && (playerPpw1 != 0 ))) {
 				Label anteMessage = new Label("Please place a bet and/or optional PPW between $5-25.");
@@ -250,7 +255,7 @@ public class ThreeCardPokerGame extends Application {
 					playerOneCharacter.hidden = false;
 
 					playerTwo.hand = theDealer.dealHand();
-					theDealer.dealersHand = theDealer.dealHand();
+
 
 					playerTwoCharacter.hideCards();
 
@@ -260,10 +265,12 @@ public class ThreeCardPokerGame extends Application {
 
 		/*----------------------Fold's actions-------------------------------*/
 		fold.setOnAction(e-> {
+			theDealer.dealersHand = theDealer.dealHand();
 			boolean dealerHand = queenHigh(theDealer);
 
 			playerOne.totalWinnings -= playerOne.anteBet;
 			playerOne.totalWinnings = PlayGame.returnPpw(playerOne);
+
 
 			playerTwoCharacter.setCards(playerTwo.hand);
 			playerTwoCharacter.hidden = false;
@@ -274,6 +281,7 @@ public class ThreeCardPokerGame extends Application {
 			int compareOne = 3;
 			int compareTwo = playerTwoChoice(playerTwo, r.nextBoolean(), dealerHand);
 
+
 			winningOne.setText("Winnings: $" + playerOne.totalWinnings);
 			winningTwo.setText("Winnings: $" + playerTwo.totalWinnings);
 			deal.setDisable(false);
@@ -281,10 +289,15 @@ public class ThreeCardPokerGame extends Application {
 			bet.setDisable(true);
 			anteOne.setDisable(false);
 			ppwOne.setDisable(false);
+			pause.play();
 			Label foldMessage = new Label();
 			String setMessage = PlayGame.messageString(compareOne, compareTwo);
 			foldMessage.setText(setMessage);
 			pane.setBottom(foldMessage);
+			playerOne.anteBet = 0;
+			anteOne.setText("0");
+			playerOne.playBet = 0;
+			wager1.setText("Wager: $" + playerOne.playBet);
 			playerOne.hand.clear();
 			playerTwo.hand.clear();
 			theDealer.dealersHand.clear();
@@ -292,6 +305,7 @@ public class ThreeCardPokerGame extends Application {
 
 		/*----------------------Bet's actions-------------------------------*/
 		bet.setOnAction(e-> {
+			theDealer.dealersHand = theDealer.dealHand();
 			boolean dealerHand = queenHigh(theDealer);
 
 			playerTwoCharacter.setCards(playerTwo.hand);
@@ -300,24 +314,43 @@ public class ThreeCardPokerGame extends Application {
 			dealer.setCards(theDealer.dealersHand);
 			dealer.hidden = false;
 
-			playerOne.totalWinnings = PlayGame.playerVDealer(theDealer, playerOne);
-			int compareOne = ThreeCardLogic.compareHands(theDealer.dealersHand, playerOne.hand);
-			int compareTwo = playerTwoChoice(playerTwo, r.nextBoolean(), dealerHand);
+			if (!dealerHand) {
+				playerOne.totalWinnings = PlayGame.playerVDealer(theDealer, playerOne);
+				int compareOne = 4;
+				int compareTwo = playerTwoChoice(playerTwo, r.nextBoolean(), dealerHand);
 
-			winningOne.setText("Winnings: $" + playerOne.totalWinnings);
-			winningTwo.setText("Winnings: $" + playerTwo.totalWinnings);
-			deal.setDisable(false);
-			fold.setDisable(true);
-			bet.setDisable(true);
-			anteOne.setDisable(false);
-			ppwOne.setDisable(false);
-			Label betMessage = new Label();
-			String setMessage = PlayGame.messageString(compareOne, compareTwo);
-			betMessage.setText(setMessage);
-			pane.setBottom(betMessage);
-			playerOne.hand.clear();
-			playerTwo.hand.clear();
-			theDealer.dealersHand.clear();
+				ppwOne.setDisable(false);
+				Label betMessage = new Label();
+				String setMessage = PlayGame.messageString(compareOne, compareTwo);
+				betMessage.setText(setMessage);
+				pane.setBottom(betMessage);
+			}
+
+			else {
+				playerOne.totalWinnings = PlayGame.playerVDealer(theDealer, playerOne);
+				int compareOne = ThreeCardLogic.compareHands(theDealer.dealersHand, playerOne.hand);
+				int compareTwo = playerTwoChoice(playerTwo, r.nextBoolean(), dealerHand);
+
+				winningOne.setText("Winnings: $" + playerOne.totalWinnings);
+				winningTwo.setText("Winnings: $" + playerTwo.totalWinnings);
+				deal.setDisable(false);
+				fold.setDisable(true);
+				bet.setDisable(true);
+				anteOne.setDisable(false);
+				ppwOne.setDisable(false);
+				pause.play();
+				Label betMessage = new Label();
+				String setMessage = PlayGame.messageString(compareOne, compareTwo);
+				betMessage.setText(setMessage);
+				pane.setBottom(betMessage);
+				playerOne.anteBet = 0;
+				anteOne.setText("0");
+				playerOne.playBet = 0;
+				wager1.setText("Wager: $" + playerOne.playBet);
+				playerOne.hand.clear();
+				playerTwo.hand.clear();
+				theDealer.dealersHand.clear();
+			}
 		});
 
 	}
@@ -329,21 +362,33 @@ public class ThreeCardPokerGame extends Application {
 		vbox.getStyleClass().add("card");
 	}
 
-	public int playerTwoChoice (Player player, boolean choice, boolean dealer) {
+	public int playerTwoChoice (Player player, boolean choice, boolean qH) {
 
 		if (choice) {
-
+			if (!qH) {
+				return 4;
+			}
 			playerTwo.totalWinnings = PlayGame.playerVDealer(theDealer, playerTwo);
+			playerTwo.anteBet = 0;
+			anteTwo.setText("0");
+			playerTwo.playBet = 0;
+			wager2.setText("Wager: $" + playerTwo.playBet);
 			return ThreeCardLogic.compareHands(theDealer.dealersHand, playerTwo.hand);
 		}
 		else {
 			playerTwo.totalWinnings -= playerTwo.anteBet;
 			playerTwo.totalWinnings = PlayGame.returnPpw(playerTwo);
+			playerTwo.anteBet = 0;
+			anteTwo.setText("0");
+			playerTwo.playBet = 0;
+			wager2.setText("Wager: $" + playerTwo.playBet);
 			return 3;
 		}
 	}
-	public boolean queenHigh(Dealer dealer) {
-		if (dealer.dealersHand.get(2).value < 12) {
+	public boolean queenHigh(Dealer qH) {
+		ArrayList<Card> queenH = qH.dealersHand;
+		Collections.sort(queenH);
+		if (queenH.get(2).value < 12) {
 			return false;
 		}
 		return true;

@@ -2,6 +2,9 @@ public class PlayGame {
 
     /*Returns what the player won or lost from the pair plus wager*/
     public static int returnPpw(Player player) {
+        if (player.pairPlusBet == 0) {
+            return player.totalWinnings;
+        }
         /*If the player's hand doesn't qualify for the ppw, subtract winnings from total*/
         if (ThreeCardLogic.evalHand(player.hand) == 0) {
             player.totalWinnings -= player.pairPlusBet;
@@ -82,6 +85,15 @@ public class PlayGame {
         }//end of else if
         else if (compareOne == 3 && compareTwo == 1) {
             return "Player one folded! Player two lost! Make a new ante and/or PPW and click Deal to play again!";
+        }//end of else if
+        else if (compareOne == 3 && compareTwo == 4) {
+            return "Player one folded! Dealer does not have queen high! Make a new ante and/or PPW and click Deal to play again!";
+        }//end of else if
+        else if (compareOne == 4 && compareTwo == 3) {
+            return "Player two folded! Dealer does not have queen high! Ante and wager bets will carry over! Make a new PPW if you want! Click Bet or Fold when ready!";
+        }//end of else if
+        else if (compareOne == 4 && compareTwo == 4) {
+            return "Dealer does not have queen high! Ante and wager bets will carry over! Make a new PPW if you want! Click Bet or Fold when ready!";
         }//end of else if
         else {
             return "Player one folded! Player two won! Make a new ante and/or PPW and click Deal to play again!";
