@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-//import javafx.scene.media.Media;
+//import javafx.scene.media.*;
 //import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -144,16 +144,15 @@ public class ThreeCardPokerGame extends Application {
 
 //		//Default music to play
 //		try{
-//			Media dbz = new Media(getClass().getResource("music/sleeping.mp3").toURI().toString());
+//			Media dbz = new Media(getClass().getResource("music/sleeping.wav").toURI().toString());
 //			player = new MediaPlayer(dbz);
 //			player.play();
 //			player.setAutoPlay(true);
 //		}
 //		//end of try
-//		catch(Exception e){
-//			System.out.println(getClass().getResource("music/sleeping.mp3"));
+//		catch(IllegalArgumentException e){
+//			System.out.println(getClass().getResource("music/sleeping.wav"));
 //		}//end of catch
-
 
 		/*----------------------Menu item's actions-------------------------------*/
 		/*Resets all the items on the screen to their original values*/
@@ -201,13 +200,13 @@ public class ThreeCardPokerGame extends Application {
 //				/*Changes music*/
 //				try{
 //					player.pause();
-//					Media dbz = new Media(getClass().getResource("music/dbz1.mp3").toURI().toString());
+//					Media dbz = new Media(getClass().getResource("music/dbz1.wav").toURI().toString());
 //					player = new MediaPlayer(dbz);
 //					player.setAutoPlay(true);
 //					player.play();
 //				}//end of try
 //				catch(URISyntaxException exception){
-//					System.out.println(getClass().getResource("music/dbz1.mp3"));
+//					System.out.println(getClass().getResource("music/dbz1.wav"));
 //				}//end of catch
 			}//end of if
 			/*Change to Enter the Dragon*/
@@ -220,13 +219,13 @@ public class ThreeCardPokerGame extends Application {
 //				/*Changes music*/
 //				try{
 //					player.pause();
-//					Media dbz = new Media(getClass().getResource("music/sleeping.mp3").toURI().toString());
+//					Media dbz = new Media(getClass().getResource("music/sleeping.wav").toURI().toString());
 //					player = new MediaPlayer(dbz);
 //					player.setAutoPlay(true);
 //					player.play();
 //				}//end of try
 //				catch(URISyntaxException exception){
-//					System.out.println(getClass().getResource("music/sleeping.mp3"));
+//					System.out.println(getClass().getResource("music/sleeping.wav"));
 //				}//end of catch
 			}
 			newLookInUse = !newLookInUse;
