@@ -11,6 +11,8 @@ public class Character {
     VBox characterAvatar;
     ImageView characterPic;
 
+    boolean hidden;
+
     CardGui card;
     CardGui card1;
     CardGui card2;
@@ -44,26 +46,42 @@ public class Character {
         cardContainer.getChildren().add(card1.card);
         cardContainer.getChildren().add(card2.card);
 
+        hidden = true;
     }
 
-    public void changeTheme(String pic, String backcover){
+    public void changeTheme(String pic, String backcover) {
         characterPic.setImage(new Image(pic));
         this.backcover = backcover;
 
+        if (hidden) {
+            card.setPic(backcover);
+            card1.setPic(backcover);
+            card2.setPic(backcover);
+        }
+    }
+    public void setCards(ArrayList<Card> cards){
+        String cardUrl = "JPEG/" + cards.get(0).getValue() + cards.get(0).getSuit() + ".jpg";
+        String card2Url = "JPEG/" + cards.get(1).getValue() + cards.get(1).getSuit() + ".jpg";
+        String card3Url = "JPEG/" + cards.get(2).getValue() + cards.get(2).getSuit() + ".jpg";
+        try{
+            card.setPic(cardUrl);
+            card1.setPic(card2Url);
+            card2.setPic(card3Url);
+        }
+        catch (IllegalArgumentException e){
+            System.out.println(cardUrl);
+            System.out.println(card2Url);
+            System.out.println(card3Url);
+        }
+
+    }
+
+    public void hideCards(){
         card.setPic(backcover);
         card1.setPic(backcover);
         card2.setPic(backcover);
 
-//        characterAvatar = new VBox();
-//        characterAvatar.getChildren().add(characterPic);
-//        characterAvatar.getStyleClass().addAll("avatar");
-//
-
-        setBackCover();
+        hidden = true;
     }
 
-    void setBackCover(){
-
-
-    }
 }

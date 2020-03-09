@@ -173,10 +173,10 @@ public class ThreeCardPokerGame extends Application {
 				scene.getStylesheets().remove("css/main.css");
 				scene.getStylesheets().add("css/alternative.css");
 
-				dealer.changeTheme("player_avatars/broly.jpeg", "JPEG/purple_back.jpg");
+				dealer.changeTheme("player_avatars/broly.jpeg", "JPEG/Green_back.jpg");
 
-				playerOneCharacter.changeTheme("player_avatars/goku.jpeg", "JPEG/purple_back.jpg");
-				playerTwoCharacter.changeTheme("player_avatars/vegeta.jpeg", "JPEG/purple_back.jpg");
+				playerOneCharacter.changeTheme("player_avatars/goku.jpeg", "JPEG/Green_back.jpg");
+				playerTwoCharacter.changeTheme("player_avatars/vegeta.jpeg", "JPEG/Green_back.jpg");
 			}
 			else{
 				scene.getStylesheets().remove("css/alternative.css");
@@ -185,7 +185,6 @@ public class ThreeCardPokerGame extends Application {
 				playerOneCharacter.changeTheme("player_avatars/bruce-lee.jpg", "JPEG/Yellow_back.jpg");
 				playerTwoCharacter.changeTheme("player_avatars/jim-kelly-enter-the-dragon (2).jpg", "JPEG/Yellow_back.jpg");
 			}
-
 			newLookInUse = !newLookInUse;
 		});
 
@@ -230,10 +229,17 @@ public class ThreeCardPokerGame extends Application {
 					Label dealMessage = new Label("Click Bet to bet wager or click Fold to stop playing.");
 					pane.setBottom(dealMessage);
 
+
 					playerOne.hand = theDealer.dealHand();
+					playerOneCharacter.setCards(playerOne.hand);
+					playerOneCharacter.hidden = false;
+
 					playerTwo.hand = theDealer.dealHand();
 					theDealer.dealersHand = theDealer.dealHand();
 
+					playerTwoCharacter.hideCards();
+
+					dealer.hideCards();
 				}
 		});
 
@@ -243,6 +249,12 @@ public class ThreeCardPokerGame extends Application {
 
 			playerOne.totalWinnings -= playerOne.anteBet;
 			playerOne.totalWinnings = PlayGame.returnPpw(playerOne);
+
+			playerTwoCharacter.setCards(playerTwo.hand);
+			playerTwoCharacter.hidden = false;
+
+			dealer.setCards(theDealer.dealersHand);
+			dealer.hidden = false;
 
 			int compareOne = 3;
 			int compareTwo = playerTwoChoice(playerTwo, r.nextBoolean(), dealerHand);
@@ -266,8 +278,12 @@ public class ThreeCardPokerGame extends Application {
 		/*----------------------Bet's actions-------------------------------*/
 		bet.setOnAction(e-> {
 			boolean dealerHand = queenHigh(theDealer);
-			//dealer's hand is true
-			//int compareOne = 4;
+
+			playerTwoCharacter.setCards(playerTwo.hand);
+			playerTwoCharacter.hidden = false;
+
+			dealer.setCards(theDealer.dealersHand);
+			dealer.hidden = false;
 
 			playerOne.totalWinnings = PlayGame.playerVDealer(theDealer, playerOne);
 			int compareOne = ThreeCardLogic.compareHands(theDealer.dealersHand, playerOne.hand);

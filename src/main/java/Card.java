@@ -12,6 +12,28 @@ public class Card implements Comparable<Card>{
         this.value = value;
     }
 
+    char getSuit(){
+        return suit;
+    }
+
+    String getValue(){
+        if(value <= 10){
+            return "" + value;
+        }
+        else if(value == 11){
+            return "J";
+        }
+        else if(value == 12){
+            return "Q";
+        }
+        else if(value == 13){
+            return "K";
+        }
+        else{
+            return "A";
+        }
+    }
+
     //Returns an array of suits used in game
     static char[] availableSuits(){
         char[] suits = {'C', 'D', 'S', 'H'};
