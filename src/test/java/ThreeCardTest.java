@@ -542,6 +542,20 @@ class ThreeCardTest {
 	@Test
 	void logicTest19() //Check to make sure basic game play works
 	{
+		testPlayer19.hand = testDealer19.dealHand();
+		testDealer19.dealersHand = testDealer19.dealHand();
 
+		assertNotEquals(testPlayer19.hand,testDealer19.dealersHand );
+	}
+
+	@Test
+	void logicTest20() //Check to make sure basic game play works
+	{
+		for(int x = 0; x < 21; x++){
+			testPlayer19.hand = testDealer19.dealHand();
+			testDealer19.dealersHand = testDealer19.dealHand();
+
+			assertNotEquals(testPlayer19.hand,testDealer19.dealersHand );
+		}
 	}
 }
