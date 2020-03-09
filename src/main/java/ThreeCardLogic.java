@@ -49,27 +49,32 @@ public class ThreeCardLogic {
 
     public static int evalPPWinnings(ArrayList<Card> hand, int bet){
         int winnings = evalHand(hand);
-
+        //Straight flush
         if (winnings == 1) {
             bet *= 40;
-        }
+        }//end of if
+        //Three of a kind
         else if (winnings == 2) {
             bet *= 30;
-        }
+        }//end of else if
+        //Straight
         else if (winnings == 3) {
             bet *= 6;
-        }
+        }//end of else if
+        //Flush
         else if (winnings == 4) {
             bet *= 3;
-        }
+        }//end of else if
+        /*Pair*/
         else if (winnings == 5) {
             bet *= 1;
-        }
+        }//end of else if
+        /*Garbage hand*/
         else {
             bet = 0;
-        }
+        }//end of else
         return bet;
-    }
+    }//end of evalPPWinnings
 
     public static int compareHands(ArrayList<Card> dealer, ArrayList<Card> player) {
         ArrayList<Card> dealerDup = dealer;

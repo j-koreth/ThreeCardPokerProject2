@@ -64,7 +64,7 @@ class ThreeCardTest {
 		int result = ThreeCardLogic.evalPPWinnings(test2, 10);
 
 		assertEquals(0, result, "Winnings was returned wrong");
-	}
+	}//end of logicTest2
 
 	@Test
 	void logicTest3() //This test is used to test if evalHand and EvalPPWinnings for a straight flush
@@ -81,7 +81,7 @@ class ThreeCardTest {
 		int result = ThreeCardLogic.evalPPWinnings(test3, 10);
 
 		assertEquals(400, result, "Winnings was returned wrong");
-	}
+	}//end of logicTest3
 
 	@Test
 	void logicTest4() //This test is used to test if evalHand and EvalPPWinnings for a three of a kind
@@ -97,7 +97,7 @@ class ThreeCardTest {
 		int result = ThreeCardLogic.evalPPWinnings(test4, 10);
 
 		assertEquals(300, result, "Winnings was returned wrong");
-	}
+	}//end of logicTest4
 
 	@Test
 	void logicTest5() //This test is used to test if evalHand and EvalPPWinnings for a straight
@@ -113,7 +113,7 @@ class ThreeCardTest {
 		int result = ThreeCardLogic.evalPPWinnings(test5, 10);
 
 		assertEquals(60, result, "Winnings was returned wrong");
-	}
+	}//end of logicTest5
 
 	@Test
 	void logicTest6() //This test is used to test if evalHand and EvalPPWinnings for a flush
@@ -129,7 +129,7 @@ class ThreeCardTest {
 		int result = ThreeCardLogic.evalPPWinnings(test6, 10);
 
 		assertEquals(30, result, "Winnings was returned wrong");
-	}
+	}//end of logicTest6
 
 	@Test
 	void logicTest7() //This test is used to test if evalHand and EvalPPWinnings for a pair
@@ -152,7 +152,7 @@ class ThreeCardTest {
 		test7.add(new Card('S', 8));
 		assertNotEquals(5, ThreeCardLogic.evalHand(test7), "hand was considered a pair");
 
-	}
+	}//end of logicTest7
 
 	@Test
 	void logicTest8() //Checking winning hands vs garbage hands
@@ -181,7 +181,7 @@ class ThreeCardTest {
 		testPlayer8.hand.add(new Card('D', 9));
 
 		assertEquals(2, ThreeCardLogic.compareHands(testDealer8.dealersHand, testPlayer8.hand), "The player's hand was not better");
-	}
+	}//end of logicTest8
 
 	@Test
 	void logicTest9() // Check for winning dealer's hands against loosing player's hands
@@ -210,7 +210,7 @@ class ThreeCardTest {
 		testPlayer9.hand.add(new Card('D', 3));
 
 		assertEquals(1, ThreeCardLogic.compareHands(testDealer9.dealersHand, testPlayer9.hand), "The dealer's hand was not better");
-	}
+	}//end of logicTest9
 
 	@Test
 	void logicTest10()
@@ -239,7 +239,7 @@ class ThreeCardTest {
 		testPlayer10.hand.add(new Card('H', 4));
 
 		assertEquals(2, ThreeCardLogic.compareHands(testDealer10.dealersHand, testPlayer10.hand), "The player's hand was not better");
-	}
+	}//end of logicTest10
 
 	@Test
 	void logicTest11() // Check possibilities for garbage hand (evalHand = 0)
@@ -283,7 +283,7 @@ class ThreeCardTest {
 
 		assertEquals(2, ThreeCardLogic.compareHands(testDealer11.dealersHand, testPlayer11.hand), "The player's hand is not better");
 
-	}
+	}//end of logicTest11
 
 	@Test
 	void logicTest12() // Check possibilities for straight flush (evalHand = 1)
@@ -326,7 +326,7 @@ class ThreeCardTest {
 		testPlayer12.hand.add(new Card('D', 7));
 
 		assertEquals(2, ThreeCardLogic.compareHands(testDealer12.dealersHand, testPlayer12.hand), "The player's hand is not better");
-	}
+	}//end of logicTest12
 
 	@Test
 	void logicTest13() // Check possibilities for three of a kind (evalHand = 2)
@@ -356,7 +356,7 @@ class ThreeCardTest {
 		testPlayer13.hand.add(new Card('D', 7));
 
 		assertEquals(2, ThreeCardLogic.compareHands(testDealer13.dealersHand, testPlayer13.hand), "The player's hand is not better");
-	}
+	}//end of logicTest13
 
 	@Test
 	void logicTest14() // Check possibilities for straight (evalHand = 3)
@@ -399,7 +399,7 @@ class ThreeCardTest {
 		testPlayer14.hand.add(new Card('S', 5));
 
 		assertEquals(2, ThreeCardLogic.compareHands(testDealer14.dealersHand, testPlayer14.hand), "The player's hand is not better");
-	}
+	}//end of logicTest14
 
 	@Test
 	void logicTest15() // Check possibilities for flush (evalHand = 4)
@@ -442,7 +442,7 @@ class ThreeCardTest {
 		testPlayer15.hand.add(new Card('S', 3));
 
 		assertEquals(2, ThreeCardLogic.compareHands(testDealer15.dealersHand, testPlayer15.hand), "The player's hand is not better");
-	}
+	}//end of logicTest15
 
 	@Test
 	void logicTest16() // Check possibilities for pair (evalHand = 5)
@@ -485,7 +485,7 @@ class ThreeCardTest {
 		testPlayer16.hand.add(new Card('C', 10));
 
 		assertEquals(2, ThreeCardLogic.compareHands(testDealer16.dealersHand, testPlayer16.hand), "The player's hand is not better");
-	}
+	}//end of logicTest16
 
 	@Test
 	void logicTest17() //Check for certain odd cases with pairs
@@ -517,7 +517,7 @@ class ThreeCardTest {
 		testPlayer17.hand.add(new Card('S', 8));
 
 		assertEquals(2, ThreeCardLogic.compareHands(testDealer17.dealersHand, testPlayer17.hand), "Player has the better hand");
-	}
+	}//end of logicTest17
 
 	@Test
 	void logicTest18() // Other possible hands test
@@ -537,7 +537,7 @@ class ThreeCardTest {
 		testDealer18.dealersHand.clear();
 		testPlayer18.hand.clear();
 
-	}
+	}//end of logicTest18
 
 	@Test
 	void logicTest19() //Check to make sure basic game play works
